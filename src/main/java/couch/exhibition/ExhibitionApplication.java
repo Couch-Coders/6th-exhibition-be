@@ -10,6 +10,6 @@ public class ExhibitionApplication {
 		SpringApplication.run(ExhibitionApplication.class, args);
 	}
 
-
+// 화이팅!!
 
 }
