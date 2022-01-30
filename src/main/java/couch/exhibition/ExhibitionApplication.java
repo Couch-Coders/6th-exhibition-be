@@ -9,7 +9,4 @@ public class ExhibitionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExhibitionApplication.class, args);
 	}
-
-// 화이팅!!
-
 }
