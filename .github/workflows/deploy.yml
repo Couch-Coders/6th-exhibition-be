@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [develop]  # develop branch만 설정 시도
+    branches: [develop]
 
 jobs:
   build:
