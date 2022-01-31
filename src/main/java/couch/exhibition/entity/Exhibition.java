@@ -61,7 +61,7 @@ public class Exhibition {
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
     private List<Review> exhibitionReviews = new ArrayList<>();
 
-    @Builder  // 빌더 패턴
+    @Builder
     private Exhibition(String title, String place, String city, String district,
                        BigDecimal latitude, BigDecimal longitude,
                        LocalDate startDate, LocalDate endDate,
