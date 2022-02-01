@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: Couch-Coders/6th-exhibition-fe
-          path: ./
+          path: ./frontend
       - uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
