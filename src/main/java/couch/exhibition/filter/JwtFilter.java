@@ -31,7 +31,6 @@ public class JwtFilter extends OncePerRequestFilter{
         this.firebaseAuth = firebaseAuth;
     }
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)// not annotated parameter overrides @nonnullapi parameter 라는 경고가 떠서 @NonNull 붙여보았음.
             throws ServletException, IOException {
@@ -56,7 +55,7 @@ public class JwtFilter extends OncePerRequestFilter{
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch(NoSuchElementException e){
             // ErrorMessage 응답 전송
-            response.setStatus(HttpStatus.SC_NOT_FOUND); // SC_NOT_FOUND로 변경?
+            response.setStatus(HttpStatus.SC_NOT_FOUND);
             response.setContentType("application/json");
             response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");
             return;

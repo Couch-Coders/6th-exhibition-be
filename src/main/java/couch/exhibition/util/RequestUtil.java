@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestUtil {
 
     public static String getAuthorizationToken(String header) {
-        header.replace("Bearer ", "");
+        header.replace("Bearer ", ""); // 삭제?
         // Authorization: Bearer <access_token>
         if (header == null || !header.startsWith("Bearer ")) {
             throw new IllegalArgumentException("Invalid authorization header");

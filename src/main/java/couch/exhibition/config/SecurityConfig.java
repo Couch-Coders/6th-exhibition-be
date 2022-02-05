@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     // 가이드 코드
     //    @Autowired
     //    private UserDetailsService userDetailsService;
@@ -49,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
+    // 추후 수정
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 회원가입, 메인페이지, 리소스
