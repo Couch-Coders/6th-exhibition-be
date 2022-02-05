@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 
 @Configuration
-public class FirebaseInitiializer {
+public class FirebaseInitializer {
     @Bean
     public FirebaseAuth firebaseAuth() throws IOException {
         FirebaseOptions options = FirebaseOptions.builder()

@@ -56,7 +56,7 @@ public class JwtFilter extends OncePerRequestFilter{
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch(NoSuchElementException e){
             // ErrorMessage 응답 전송
-            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+            response.setStatus(HttpStatus.SC_NOT_FOUND); // SC_NOT_FOUND로 변경?
             response.setContentType("application/json");
             response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");
             return;
