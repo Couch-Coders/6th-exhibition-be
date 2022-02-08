@@ -38,6 +38,7 @@ public class ExhibitionDto {
 
     private Integer likeCnt;
 
+
     public ExhibitionDto(String title, String place, String city,
                          BigDecimal latitude, BigDecimal longitude,
                          LocalDate startDate, LocalDate endDate,

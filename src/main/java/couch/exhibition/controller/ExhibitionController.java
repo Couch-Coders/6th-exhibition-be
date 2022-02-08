@@ -49,6 +49,7 @@ public class ExhibitionController {
 
             JSONObject perforInfo = (JSONObject)msgBody.get("perforInfo");
 
+
             ExhibitionDto infoObj = new ExhibitionDto((String) perforInfo.get("title"), (String) perforInfo.get("place"),(String) perforInfo.get("city"),
                     (BigDecimal) perforInfo.get("latitude"), (BigDecimal) perforInfo.get("longitude"),
                     (LocalDate) perforInfo.get("startDate"), (LocalDate) perforInfo.get("endDate"),
