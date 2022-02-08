@@ -56,7 +56,7 @@ public class Exhibition {
     private Integer likeCnt;
 
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
-    private List<Like> exhibitionLikes = new ArrayList<>();
+    private List<Likes> exhibitionLikes = new ArrayList<>();
 
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
     private List<Review> exhibitionReviews = new ArrayList<>();

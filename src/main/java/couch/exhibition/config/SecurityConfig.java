@@ -1,7 +1,7 @@
 package couch.exhibition.config;
 
 import com.google.firebase.auth.FirebaseAuth;
-import couch.exhibition.filter.JwtFilter;
+import couch.exhibition.service.filter.JwtFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;

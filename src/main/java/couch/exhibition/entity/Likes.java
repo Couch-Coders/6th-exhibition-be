@@ -7,23 +7,25 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-public class Like {
+public class Likes {
 
     @Id @GeneratedValue
-    @Column(name = "like_id")
+    @Column(name = "likes_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exhibition_id")
     private Exhibition exhibition;
 
     @Builder
-    private Like(User user, Exhibition exhibition) {
-        this.user = user;
+    private Likes(Member member, Exhibition exhibition) {
+        this.member = member;
         this.exhibition = exhibition;
     }
+
 }

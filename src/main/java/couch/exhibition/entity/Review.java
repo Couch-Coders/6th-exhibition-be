@@ -24,8 +24,8 @@ public class Review {
     private LocalDate modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exhibition_id")
@@ -33,11 +33,11 @@ public class Review {
 
     @Builder
     private Review(String content, LocalDate registeredDate, LocalDate modifiedDate,
-                   User user, Exhibition exhibition) {
+                   Member member, Exhibition exhibition) {
         this.content = content;
         this.registeredDate = registeredDate;
         this.modifiedDate = modifiedDate;
-        this.user = user;
+        this.member = member;
         this.exhibition = exhibition;
     }
 }

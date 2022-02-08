@@ -1,4 +1,4 @@
-package couch.exhibition.filter;
+package couch.exhibition.service.filter;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
