@@ -1,7 +1,8 @@
 package couch.exhibition.config;
 
 import com.google.firebase.auth.FirebaseAuth;
-import couch.exhibition.service.filter.JwtFilter;
+import couch.exhibition.filter.JwtFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -20,17 +21,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // 가이드 코드
-    //    @Autowired
-    //    private UserDetailsService userDetailsService;
-    //
-    //    @Autowired
-    //    private FirebaseAuth firebaseAuth;
+//        @Autowired
+//        private UserDetailsService userDetailsService;
+//
+//        @Autowired
+//        private FirebaseAuth firebaseAuth;
 
     // ---> field injection is not recommended 라는 경고로 아래와 같이 수정해봤습니다.
-
-    private final UserDetailsService userDetailsService;
-
-    private final FirebaseAuth firebaseAuth;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private FirebaseAuth firebaseAuth;
 
     public SecurityConfig(FirebaseAuth firebaseAuth, UserDetailsService userDetailsService) {
         this.firebaseAuth = firebaseAuth;
