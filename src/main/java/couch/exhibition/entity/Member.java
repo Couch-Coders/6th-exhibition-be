@@ -15,7 +15,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(length = 50, name = "member_name",nullable = false)
+    @Column(length = 50, name = "member_name", nullable = false)
     private String memberName;
 
     @Column(length = 50)
@@ -28,7 +28,7 @@ public class Member {
     private List<Review> memberReviews = new ArrayList<>();
 
     @Builder
-    private Member(String memberName, String nickname) {
+    public Member(String memberName, String nickname) {
         this.memberName = memberName;
         this.nickname = nickname;
     }

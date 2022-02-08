@@ -23,7 +23,7 @@ public class Likes {
     private Exhibition exhibition;
 
     @Builder
-    private Likes(Member member, Exhibition exhibition) {
+    public Likes(Member member, Exhibition exhibition) {
         this.member = member;
         this.exhibition = exhibition;
     }

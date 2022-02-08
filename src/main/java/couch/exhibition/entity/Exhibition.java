@@ -26,8 +26,8 @@ public class Exhibition {
     @Column(length = 50)
     private String city;
 
-    @Column(length = 50)
-    private String district;
+//    @Column(length = 50)
+//    private String district;
 
     private BigDecimal latitude;
     private BigDecimal longitude;
@@ -62,15 +62,14 @@ public class Exhibition {
     private List<Review> exhibitionReviews = new ArrayList<>();
 
     @Builder
-    private Exhibition(String title, String place, String city, String district,
-                       BigDecimal latitude, BigDecimal longitude,
-                       LocalDate startDate, LocalDate endDate,
-                       String contactLink, String ticketPrice, String reservationLink,
-                       String posterUrl, boolean progress, Integer likeCnt) {
+    public Exhibition(String title, String place, String city,
+                      BigDecimal latitude, BigDecimal longitude,
+                      LocalDate startDate, LocalDate endDate,
+                      String contactLink, String ticketPrice, String reservationLink,
+                      String posterUrl) {
         this.title = title;
         this.place = place;
         this.city = city;
-        this.district = district;
         this.latitude = latitude;
         this.longitude = longitude;
         this.startDate = startDate;
@@ -79,7 +78,5 @@ public class Exhibition {
         this.ticketPrice = ticketPrice;
         this.reservationLink = reservationLink;
         this.posterUrl = posterUrl;
-        this.progress = progress;
-        this.likeCnt = likeCnt;
     }
 }

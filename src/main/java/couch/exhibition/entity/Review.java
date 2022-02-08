@@ -32,7 +32,7 @@ public class Review {
     private Exhibition exhibition;
 
     @Builder
-    private Review(String content, LocalDate registeredDate, LocalDate modifiedDate,
+    public Review(String content, LocalDate registeredDate, LocalDate modifiedDate,
                    Member member, Exhibition exhibition) {
         this.content = content;
         this.registeredDate = registeredDate;
