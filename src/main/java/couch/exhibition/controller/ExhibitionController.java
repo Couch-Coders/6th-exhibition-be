@@ -1,6 +1,7 @@
 package couch.exhibition.controller;
 
 import couch.exhibition.dto.ExhibitionDto;
+import couch.exhibition.entity.Exhibition;
 import couch.exhibition.repository.ExhibitionRepository;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -49,8 +50,7 @@ public class ExhibitionController {
 
             JSONObject perforInfo = (JSONObject)msgBody.get("perforInfo");
 
-
-            ExhibitionDto infoObj = new ExhibitionDto((String) perforInfo.get("title"), (String) perforInfo.get("place"),(String) perforInfo.get("city"),
+            Exhibition infoObj = new Exhibition((String) perforInfo.get("title"), (String) perforInfo.get("place"),(String) perforInfo.get("city"),
                     (BigDecimal) perforInfo.get("latitude"), (BigDecimal) perforInfo.get("longitude"),
                     (LocalDate) perforInfo.get("startDate"), (LocalDate) perforInfo.get("endDate"),
                     (String) perforInfo.get("contactLink"), (String) perforInfo.get("ticketPrice"),

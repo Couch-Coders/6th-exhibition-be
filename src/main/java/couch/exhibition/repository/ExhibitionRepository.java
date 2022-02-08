@@ -1,7 +1,9 @@
 package couch.exhibition.repository;
 
-import couch.exhibition.dto.ExhibitionDto;
+import couch.exhibition.entity.Exhibition;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ExhibitionRepository extends JpaRepository<ExhibitionDto, Long> {
+@Repository
+public interface ExhibitionRepository extends JpaRepository<Exhibition, Long> {
 }
