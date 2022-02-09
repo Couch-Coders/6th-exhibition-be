@@ -1,7 +1,14 @@
 package couch.exhibition.service;
 
-import org.springframework.stereotype.Service;
+import couch.exhibition.repository.ExhibitionRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Transactional
 public class ExhibitionService {
+
+    public final ExhibitionRepository exhibitionRepository;
+
+    public ExhibitionService(ExhibitionRepository exhibitionRepository) {
+        this.exhibitionRepository = exhibitionRepository;
+    }
 }
