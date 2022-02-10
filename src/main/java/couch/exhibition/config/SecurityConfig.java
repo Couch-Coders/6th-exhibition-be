@@ -20,14 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // 가이드 코드
-//        @Autowired
-//        private UserDetailsService userDetailsService;
-//
-//        @Autowired
-//        private FirebaseAuth firebaseAuth;
-
-    // ---> field injection is not recommended 라는 경고로 아래와 같이 수정해봤습니다.
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -38,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    // 아래부터는 가이드 코드 그대로
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -49,12 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
-    // 추후 수정
     @Override
     public void configure(WebSecurity web) throws Exception {
-        // 회원가입, 메인페이지, 리소스
-        web.ignoring().antMatchers(HttpMethod.POST, "/users")
+        // 유저 관련 페이지, 메인페이지, 전시회 DB 저장 페이지, 리소스
+        web.ignoring().antMatchers(HttpMethod.POST, "/members")
                 .antMatchers("/")
+                .antMatchers(HttpMethod.GET, "/api")
+                .antMatchers(HttpMethod.POST, "/api")
                 .antMatchers("/resources/**");
     }
 }
