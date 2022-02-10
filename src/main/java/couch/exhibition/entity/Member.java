@@ -3,7 +3,6 @@ package couch.exhibition.entity;
 import com.google.firebase.database.annotations.NotNull;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,9 +15,9 @@ import java.util.List;
 @Getter
 public class Member implements UserDetails {
 
-    @Id @GeneratedValue
+    @Id
     @Column(name = "member_id")
-    private Long id;
+    private String id;
 
     @Column(length = 50, name = "member_name")
     @NotNull
@@ -37,6 +36,10 @@ public class Member implements UserDetails {
     public Member(String memberName, String nickname) {
         this.memberName = memberName;
         this.nickname = nickname;
+    }
+
+    public Member() {
+        throw new RuntimeException("Member class는 기본 생성자를 지원하지 않습니다.");
     }
 
     @Override
