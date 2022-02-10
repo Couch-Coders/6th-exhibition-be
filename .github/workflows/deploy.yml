@@ -22,6 +22,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+
+      - name: create service key
+        run: |
+          echo ${FIREBASE_SERVICE_KEY} > serviceAccountKey.json
+          cat serviceAccountKey.json
+          echo ${FIREBASE_SERVICE_KEY}
+        env:
+          FIREBASE_SERVICE_KEY: ${{secrets.FIREBASE_SERVICE_KEY}}
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 #This is the action
         with:
