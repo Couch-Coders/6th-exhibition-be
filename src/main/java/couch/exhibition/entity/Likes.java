@@ -14,7 +14,6 @@ public class Likes {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -28,4 +27,7 @@ public class Likes {
         this.exhibition = exhibition;
     }
 
+    public Likes() {
+        throw new RuntimeException("Likes class는 기본 생성자를 지원하지 않습니다.");
+    }
 }

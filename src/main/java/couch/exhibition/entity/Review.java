@@ -40,4 +40,8 @@ public class Review {
         this.member = member;
         this.exhibition = exhibition;
     }
+
+    public Review() {
+        throw new RuntimeException("Review class는 기본 생성자를 지원하지 않습니다.");
+    }
 }

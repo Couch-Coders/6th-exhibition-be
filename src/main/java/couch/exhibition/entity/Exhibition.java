@@ -17,19 +17,14 @@ public class Exhibition {
     @Column(name = "exhibition_id")
     private Long id;
 
-    @Column(length = 100)
     private String title;
 
-    @Column(length = 100)
     private String place;
 
-    @Column(length = 50)
-    private String city;
-
-//    @Column(length = 50)
-//    private String district;
+    private String placeAddr;
 
     private BigDecimal latitude;
+
     private BigDecimal longitude;
 
     @Column(name = "start_date")
@@ -38,19 +33,17 @@ public class Exhibition {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "contact_link", length = 100)
+    @Column(name = "contact_link")
     private String contactLink;
 
-    @Column(name = "ticket_price", length = 50)
+    @Column(name = "ticket_price")
     private String ticketPrice;
 
-    @Column(name = "reservation_link", length = 100)
+    @Column(name = "reservation_link")
     private String reservationLink;
 
-    @Column(name = "poster_url", length = 100)
+    @Column(name = "poster_url")
     private String posterUrl;
-
-    private boolean progress;
 
     @Column(name = "like_count")
     private Integer likeCnt;
@@ -62,14 +55,14 @@ public class Exhibition {
     private List<Review> exhibitionReviews = new ArrayList<>();
 
     @Builder
-    public Exhibition(String title, String place, String city,
+    public Exhibition(String title, String place, String placeAddr,
                       BigDecimal latitude, BigDecimal longitude,
                       LocalDate startDate, LocalDate endDate,
                       String contactLink, String ticketPrice, String reservationLink,
                       String posterUrl) {
         this.title = title;
         this.place = place;
-        this.city = city;
+        this.placeAddr = placeAddr;
         this.latitude = latitude;
         this.longitude = longitude;
         this.startDate = startDate;
@@ -78,5 +71,13 @@ public class Exhibition {
         this.ticketPrice = ticketPrice;
         this.reservationLink = reservationLink;
         this.posterUrl = posterUrl;
+    }
+
+    public Exhibition() {
+        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
+    }
+
+    public void setLikeCnt(Integer likeCnt) {
+        this.likeCnt = likeCnt;
     }
 }

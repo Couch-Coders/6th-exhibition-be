@@ -19,11 +19,10 @@ public class Member implements UserDetails {
     @Column(name = "member_id")
     private String id;
 
-    @Column(length = 50, name = "member_name")
+    @Column(name = "member_name")
     @NotNull
     private String memberName;
 
-    @Column(length = 50)
     private String nickname;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
