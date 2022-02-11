@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @Getter
 public class Exhibition {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "exhibition_id")
     private Long id;
 
@@ -28,21 +27,21 @@ public class Exhibition {
     private BigDecimal longitude;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private Integer startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private Integer endDate;
 
-    @Column(name = "contact_link")
+    @Column(name = "contact_link",length = 450)
     private String contactLink;
 
     @Column(name = "ticket_price")
     private String ticketPrice;
 
-    @Column(name = "reservation_link")
+    @Column(name = "reservation_link", length = 450)
     private String reservationLink;
 
-    @Column(name = "poster_url")
+    @Column(name = "poster_url", length = 450)
     private String posterUrl;
 
     @Column(name = "like_count")
@@ -57,9 +56,9 @@ public class Exhibition {
     @Builder
     public Exhibition(String title, String place, String placeAddr,
                       BigDecimal latitude, BigDecimal longitude,
-                      LocalDate startDate, LocalDate endDate,
+                      Integer startDate, Integer endDate,
                       String contactLink, String ticketPrice, String reservationLink,
-                      String posterUrl) {
+                      String posterUrl, Integer likeCnt) {
         this.title = title;
         this.place = place;
         this.placeAddr = placeAddr;
@@ -71,11 +70,12 @@ public class Exhibition {
         this.ticketPrice = ticketPrice;
         this.reservationLink = reservationLink;
         this.posterUrl = posterUrl;
+        this.likeCnt = likeCnt;
     }
 
-    public Exhibition() {
-        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
-    }
+//    public Exhibition() {
+//        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
+//    }
 
     public void setLikeCnt(Integer likeCnt) {
         this.likeCnt = likeCnt;

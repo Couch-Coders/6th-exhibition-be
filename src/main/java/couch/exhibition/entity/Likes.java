@@ -27,7 +27,7 @@ public class Likes {
         this.exhibition = exhibition;
     }
 
-    public Likes() {
-        throw new RuntimeException("Likes class는 기본 생성자를 지원하지 않습니다.");
-    }
+//    public Likes() {
+//        throw new RuntimeException("Likes class는 기본 생성자를 지원하지 않습니다.");
+//    }
 }

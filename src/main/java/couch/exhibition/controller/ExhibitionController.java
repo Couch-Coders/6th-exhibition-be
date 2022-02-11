@@ -3,10 +3,8 @@ package couch.exhibition.controller;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.json.XML;
 import org.json.JSONObject;
-
-//import org.json.simple.JSONObject;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +16,6 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 
 @Slf4j
 @Controller
@@ -53,9 +50,9 @@ public class ExhibitionController {
 
             Exhibition infoObj = new Exhibition((String) perforInfo.get("title"), (String) perforInfo.get("place"),(String) perforInfo.get("placeAddr"),
                     (BigDecimal) perforInfo.get("gpsX"), (BigDecimal) perforInfo.get("gpsY"),
-                    (LocalDate) perforInfo.get("startDate"), (LocalDate) perforInfo.get("endDate"),
-                    (String) perforInfo.get("placeUrl"), (String) perforInfo.get("price"),
-                    (String) perforInfo.get("url"), (String) perforInfo.get("imgUrl"));
+                    (Integer) perforInfo.get("startDate"), (Integer) perforInfo.get("endDate"),
+                    (String) perforInfo.get("url"), (String) perforInfo.get("price"),
+                    (String) perforInfo.get("placeUrl"), (String) perforInfo.get("imgUrl"), 0);
 
             exhibitionRepository.save(infoObj);
 

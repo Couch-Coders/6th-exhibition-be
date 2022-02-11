@@ -37,9 +37,9 @@ public class Member implements UserDetails {
         this.nickname = nickname;
     }
 
-    public Member() {
-        throw new RuntimeException("Member class는 기본 생성자를 지원하지 않습니다.");
-    }
+//    public Member() {
+//        throw new RuntimeException("Member class는 기본 생성자를 지원하지 않습니다.");
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
