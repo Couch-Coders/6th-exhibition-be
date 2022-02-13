@@ -4,7 +4,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import couch.exhibition.util.RequestUtil;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,12 +31,13 @@ public class JwtFilter extends OncePerRequestFilter{
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)// not annotated parameter overrides @nonnullapi parameter 라는 경고가 떠서 @NonNull 붙여보았음.
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)// not annotated parameter overrides @nonnullapi parameter 라는 경고가 떠서 @NonNull 붙여보았음.
             throws ServletException, IOException {
         // get the token from the request
         FirebaseToken decodedToken;
         try{
             String header = RequestUtil.getAuthorizationToken(request.getHeader("Authorization"));
+            log.info(header);
             decodedToken = firebaseAuth.verifyIdToken(header);
         } catch (FirebaseAuthException | IllegalArgumentException e) {
             // ErrorMessage 응답 전송

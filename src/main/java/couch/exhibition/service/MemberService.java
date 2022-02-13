@@ -22,6 +22,7 @@ public class MemberService implements UserDetailsService {
         this.memberRepository = memberRepository;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> member = memberRepository.findById(username); // optional
@@ -29,10 +30,11 @@ public class MemberService implements UserDetailsService {
     }
 
     //회원 등록
-    public Member register(String memberName, String nickname) { // uid?
+    public Member register(String memberName, String nickname,String id) { // uid?
         Member registeredMember = Member.builder()
                 .memberName(memberName)
                 .nickname(nickname)
+                .id(id)
                 .build();
 
         memberRepository.save(registeredMember);

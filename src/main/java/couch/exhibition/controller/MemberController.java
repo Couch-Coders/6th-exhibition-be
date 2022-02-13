@@ -42,7 +42,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), registeredMemberDto.getNickname());
+                decodedToken.getName(), registeredMemberDto.getNickname(),decodedToken.getUid() ); //registeredMemberDto.getNickname() ->
         return new MemberDto(registeredMember);
     }
 

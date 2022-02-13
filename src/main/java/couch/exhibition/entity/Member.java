@@ -32,9 +32,10 @@ public class Member implements UserDetails {
     private List<Review> memberReviews = new ArrayList<>();
 
     @Builder
-    public Member(String memberName, String nickname) {
+    public Member(String memberName, String nickname, String id) {
         this.memberName = memberName;
         this.nickname = nickname;
+        this.id = id;
     }
 
 //    public Member() {
