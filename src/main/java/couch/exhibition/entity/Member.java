@@ -3,6 +3,7 @@ package couch.exhibition.entity;
 import com.google.firebase.database.annotations.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member implements UserDetails {
 
     @Id
@@ -32,10 +34,10 @@ public class Member implements UserDetails {
     private List<Review> memberReviews = new ArrayList<>();
 
     @Builder
-    public Member(String memberName, String nickname, String id) {
+    public Member(String id, String memberName, String nickname) {
+        this.id = id;
         this.memberName = memberName;
         this.nickname = nickname;
-        this.id = id;
     }
 
 //    public Member() {

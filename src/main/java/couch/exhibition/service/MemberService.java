@@ -4,6 +4,7 @@ import couch.exhibition.entity.Member;
 import couch.exhibition.exception.CustomException;
 import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional
 public class MemberService implements UserDetailsService {
@@ -22,15 +24,14 @@ public class MemberService implements UserDetailsService {
         this.memberRepository = memberRepository;
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Member> member = memberRepository.findById(username); // optional
-        return member.orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER)); // optional
     }
 
     //회원 등록
-    public Member register(String memberName, String nickname,String id) { // uid?
+    public Member register(String memberName, String nickname, String id) {
         Member registeredMember = Member.builder()
                 .memberName(memberName)
                 .nickname(nickname)

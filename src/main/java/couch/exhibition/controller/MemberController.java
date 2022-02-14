@@ -8,11 +8,13 @@ import couch.exhibition.dto.RegisteredMemberDto;
 import couch.exhibition.entity.Member;
 import couch.exhibition.service.MemberService;
 import couch.exhibition.util.RequestUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@Slf4j
 @RestController
 @RequestMapping("/members")
 public class MemberController {
@@ -42,7 +44,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), registeredMemberDto.getNickname(),decodedToken.getUid() ); //registeredMemberDto.getNickname() ->
+                decodedToken.getName(), registeredMemberDto.getNickname(),decodedToken.getUid()); //registeredMemberDto.getNickname() ->
         return new MemberDto(registeredMember);
     }
 
