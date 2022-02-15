@@ -44,9 +44,7 @@ public class MemberService implements UserDetailsService {
     }
 
     //닉네임 수정
-    public void editNickname(String username, String nickname) {
-        Member member = memberRepository.findById(username)
-                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    public void editNickname(Member member, String nickname) {
         member.editNickname(nickname);
     }
 

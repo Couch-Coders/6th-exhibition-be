@@ -13,6 +13,6 @@ public class MemberDto {
     public MemberDto(Member member) {
         this.id = member.getId();
         this.memberName = member.getMemberName();
-        this.nickname = member.getNickname();
+        this.nickname = member.getMemberName();
     }
 }

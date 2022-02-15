@@ -28,9 +28,10 @@ public class MemberController {
     }
 
     //회원가입
-    @PostMapping("")
-    public MemberDto register(@RequestHeader("Authorization") String authorization,
-                              @RequestBody RegisteredMemberDto registeredMemberDto) {
+    @ResponseBody
+    //@RequestMapping(value = "", method = RequestMethod.POST)
+    @PostMapping
+    public MemberDto register(@RequestHeader("Authorization") String authorization) {
 
         //Token 획득
         FirebaseToken decodedToken;
@@ -44,7 +45,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), registeredMemberDto.getNickname(),decodedToken.getUid()); //registeredMemberDto.getNickname() ->
+                decodedToken.getName(),decodedToken.getName(),decodedToken.getUid());
         return new MemberDto(registeredMember);
     }
 
@@ -56,10 +57,11 @@ public class MemberController {
     }
 
     //닉네임 수정
-    @PostMapping("/me")
+    //@PostMapping("/me")
+    @PatchMapping("/me")
     public void editNickname(Authentication authentication, @RequestBody RegisteredMemberDto registeredMemberDto) {
         Member member = ((Member) authentication.getPrincipal());
-        memberService.editNickname(member.getUsername(), registeredMemberDto.getNickname());
+        memberService.editNickname(member, registeredMemberDto.getNickname());
     }
 
     //회원 탈퇴

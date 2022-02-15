@@ -1,6 +1,6 @@
 #!/bin/sh
 # shellcheck disable=SC2164
-cd couch-exhibition
+cd ../couch-exhibition
 npm install
 npm run build
 # shellcheck disable=SC2103
