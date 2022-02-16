@@ -58,7 +58,7 @@ public class MemberController {
 
     //닉네임 수정
     //@PostMapping("/me")
-    @PatchMapping("/me")
+    @PatchMapping(value = "/me", consumes = "application/json")
     public void editNickname(Authentication authentication, @RequestBody RegisteredMemberDto registeredMemberDto) {
         Member member = ((Member) authentication.getPrincipal());
         memberService.editNickname(member, registeredMemberDto.getNickname());
