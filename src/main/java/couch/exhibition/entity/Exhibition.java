@@ -2,6 +2,7 @@ package couch.exhibition.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Exhibition {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
