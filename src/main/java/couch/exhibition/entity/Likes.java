@@ -2,11 +2,13 @@ package couch.exhibition.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Likes {
 
     @Id @GeneratedValue

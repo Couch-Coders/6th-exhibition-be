@@ -1,13 +1,16 @@
 package couch.exhibition.entity;
 
+import couch.exhibition.dto.ReviewRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Review {
 
     @Id @GeneratedValue
@@ -39,6 +42,10 @@ public class Review {
         this.modifiedDate = modifiedDate;
         this.member = member;
         this.exhibition = exhibition;
+    }
+
+    public void updateReview(ReviewRequestDTO updateExhibitionReviewDTO) {
+        this.content = updateExhibitionReviewDTO.getContent();
     }
 
 //    public Review() {
