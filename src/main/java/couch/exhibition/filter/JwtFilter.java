@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter{
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)// not annotated parameter overrides @nonnullapi parameter 라는 경고가 떠서 @NonNull 붙여보았음.
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // get the token from the request
         FirebaseToken decodedToken;
@@ -49,9 +49,9 @@ public class JwtFilter extends OncePerRequestFilter{
         // User를 가져와 SecurityContext에 저장한다.
         try{
             UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
-            log.info(String.valueOf(user));
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     user, null, user.getAuthorities());
+            log.info(String.valueOf(authentication));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch(NoSuchElementException e){
             // ErrorMessage 응답 전송

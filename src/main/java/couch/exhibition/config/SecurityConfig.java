@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .csrf().disable() // GET, POST 이외의 HTTP METHOD 가능토록 함
+                .authorizeRequests()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
                         UsernamePasswordAuthenticationFilter.class)
