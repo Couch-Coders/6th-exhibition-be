@@ -4,6 +4,9 @@ import couch.exhibition.dto.ReviewRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Review {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long id;
 
@@ -21,9 +24,11 @@ public class Review {
     private String content;
 
     @Column(name = "registered_date")
+    @CreatedDate
     private LocalDate registeredDate;
 
     @Column(name = "modified_date")
+    @LastModifiedDate
     private LocalDate modifiedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,8 +40,9 @@ public class Review {
     private Exhibition exhibition;
 
     @Builder
-    public Review(String content, LocalDate registeredDate, LocalDate modifiedDate,
+    public Review(Long id, String content, LocalDate registeredDate, LocalDate modifiedDate,
                    Member member, Exhibition exhibition) {
+        this.id = id;
         this.content = content;
         this.registeredDate = registeredDate;
         this.modifiedDate = modifiedDate;
@@ -48,7 +54,4 @@ public class Review {
         this.content = updateExhibitionReviewDTO.getContent();
     }
 
-//    public Review() {
-//        throw new RuntimeException("Review class는 기본 생성자를 지원하지 않습니다.");
-//    }
 }

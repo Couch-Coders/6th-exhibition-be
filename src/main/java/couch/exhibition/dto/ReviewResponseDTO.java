@@ -1,6 +1,5 @@
 package couch.exhibition.dto;
 
-import couch.exhibition.entity.Exhibition;
 import couch.exhibition.entity.Review;
 import lombok.Data;
 

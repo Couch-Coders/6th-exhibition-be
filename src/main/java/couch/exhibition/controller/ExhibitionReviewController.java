@@ -4,8 +4,8 @@ import couch.exhibition.dto.ReviewRequestDTO;
 import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.entity.Member;
+import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.service.ExhibitionReviewService;
-import couch.exhibition.service.ExhibitionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,16 +19,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exhibitions/{exhibitionId}/reviews")
 public class ExhibitionReviewController {
 
+    private final ExhibitionRepository exhibitionRepository;
     private final ExhibitionReviewService exhibitionReviewService;
 
-    public ExhibitionReviewController(ExhibitionReviewService exhibitionReviewService) {
+    public ExhibitionReviewController(ExhibitionRepository exhibitionRepository,
+                                      ExhibitionReviewService exhibitionReviewService) {
+        this.exhibitionRepository = exhibitionRepository;
         this.exhibitionReviewService = exhibitionReviewService;
     }
 
     @GetMapping("") // exhibition id에 해당하는 리뷰 조회
     public Page<ReviewResponseDTO> viewExhibitionReviews(@PathVariable("exhibitionId") Long exhibitionId,
                                                          @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        Exhibition exhibition = ExhibitionService.findExhibitionById(exhibitionId);
+        Exhibition exhibition = exhibitionRepository.getById(exhibitionId);
         return exhibitionReviewService.getExhibitionReviewList(exhibition, pageable).map(review -> new ReviewResponseDTO(review));
     }
 
