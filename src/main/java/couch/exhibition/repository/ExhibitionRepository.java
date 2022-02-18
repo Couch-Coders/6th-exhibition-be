@@ -38,6 +38,4 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>, J
     @Query("select m from Exhibition m where m.placeAddr like %:area% and (m.title like %:keyword% or m.place like %:keyword% or m.placeAddr like %:keyword%)")
     List<Exhibition> findByAreaAndKeyword(@Param("area") String area, @Param("keyword") String keyword);
 
-    //@Query(value = "Insert into Review value()")
-
 }
