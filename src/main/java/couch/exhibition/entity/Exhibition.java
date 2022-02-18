@@ -1,7 +1,6 @@
 package couch.exhibition.entity;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,9 +9,12 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"exhibitionReviews", "exhibitionLikes"})
+//@ToString(exclude = {"exhibitionReviews", "exhibitionLikes"})
 public class Exhibition {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue
     @Column(name = "exhibition_id")
     private Long id;
 
@@ -72,6 +74,9 @@ public class Exhibition {
         this.posterUrl = posterUrl;
         this.likeCnt = likeCnt;
     }
+
+
+
 
 //    public Exhibition() {
 //        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");

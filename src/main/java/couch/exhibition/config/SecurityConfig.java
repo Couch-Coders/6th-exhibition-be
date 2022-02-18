@@ -49,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api")
                 .antMatchers("/resources/**")
                 .antMatchers("/favicon.ico")
-                .antMatchers("/index");
+                .antMatchers("/index")
+                .antMatchers("/exhibitions/**");
     }
 }

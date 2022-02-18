@@ -3,6 +3,9 @@ package couch.exhibition.dto;
 import couch.exhibition.entity.Member;
 import lombok.Data;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Data
 public class MemberDto {
 

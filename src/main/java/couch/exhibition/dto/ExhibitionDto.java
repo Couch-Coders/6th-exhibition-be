@@ -1,11 +1,15 @@
 package couch.exhibition.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class ExhibitionDto {
 
@@ -38,22 +42,5 @@ public class ExhibitionDto {
 
     private Integer likeCnt;
 
-    public ExhibitionDto(String title, String place, String city,
-                         BigDecimal latitude, BigDecimal longitude,
-                         LocalDate startDate, LocalDate endDate,
-                         String contactLink, String ticketPrice,
-                         String reservationLink, String posterUrl
-                         ) {
-        this.title = title;
-        this.place = place;
-        this.city = city;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.contactLink = contactLink;
-        this.ticketPrice = ticketPrice;
-        this.reservationLink = reservationLink;
-        this.posterUrl = posterUrl;
-    }
+
 }
