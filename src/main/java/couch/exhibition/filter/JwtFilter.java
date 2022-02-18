@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter{
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)// not annotated parameter overrides @nonnullapi parameter 라는 경고가 떠서 @NonNull 붙여보았음.
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // get the token from the request
         FirebaseToken decodedToken;

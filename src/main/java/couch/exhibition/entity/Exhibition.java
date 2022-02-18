@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Exhibition {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exhibition_id")
     private Long id;
 
@@ -74,10 +74,6 @@ public class Exhibition {
         this.posterUrl = posterUrl;
         this.likeCnt = likeCnt;
     }
-
-//    public Exhibition() {
-//        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
-//    }
 
     public void setLikeCnt(Integer likeCnt) {
         this.likeCnt = likeCnt;

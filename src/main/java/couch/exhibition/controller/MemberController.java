@@ -28,9 +28,7 @@ public class MemberController {
     }
 
     //회원가입
-    @ResponseBody
-    //@RequestMapping(value = "", method = RequestMethod.POST)
-    @PostMapping
+    @PostMapping("")
     public MemberDto register(@RequestHeader("Authorization") String authorization) {
 
         //Token 획득
@@ -57,7 +55,6 @@ public class MemberController {
     }
 
     //닉네임 수정
-    //@PostMapping("/me")
     @PatchMapping("/me")
     public void editNickname(Authentication authentication, @RequestBody RegisteredMemberDto registeredMemberDto) {
         Member member = ((Member) authentication.getPrincipal());
