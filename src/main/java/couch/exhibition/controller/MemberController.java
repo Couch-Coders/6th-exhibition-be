@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import couch.exhibition.dto.MemberDto;
-import couch.exhibition.dto.RegisteredMemberDto;
+import couch.exhibition.dto.UpdatedMemberDTO;
 import couch.exhibition.entity.Member;
 import couch.exhibition.service.MemberService;
 import couch.exhibition.util.RequestUtil;
@@ -43,7 +43,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(),decodedToken.getName(),decodedToken.getUid());
+                decodedToken.getName(), decodedToken.getName(), decodedToken.getUid());
         return new MemberDto(registeredMember);
     }
 
@@ -56,15 +56,15 @@ public class MemberController {
 
     //닉네임 수정
     @PatchMapping("/me")
-    public void editNickname(Authentication authentication, @RequestBody RegisteredMemberDto registeredMemberDto) {
+    public void editNickname(Authentication authentication, @RequestBody UpdatedMemberDTO updatedMemberDTO) {
         Member member = ((Member) authentication.getPrincipal());
-        memberService.editNickname(member, registeredMemberDto.getNickname());
+        memberService.editNickname(member.getId(), updatedMemberDTO);
     }
 
     //회원 탈퇴
     @DeleteMapping("/me")
     public void deleteRegisteredMember(Authentication authentication) {
         Member member = ((Member) authentication.getPrincipal());
-        memberService.deleteMember(member.getMemberName()); // 엔티티 직접 제거?
+        memberService.deleteMember(member.getId()); // 엔티티 직접 제거?
     }
 }
