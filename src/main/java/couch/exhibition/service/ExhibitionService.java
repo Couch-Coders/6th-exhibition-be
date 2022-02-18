@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Transactional
@@ -57,32 +58,7 @@ public class ExhibitionService {
         return exhibitionRepository.findByCityAndKeyword(city, keyword);
     }
 
-//    public List<Exhibition> findByCategory( String city,String area,String keyword) {
-//
-//        List<Exhibition> progressExhibition = exhibitionRepository.findByProgress();
-//        List<Exhibition> list;
-//        List<Exhibition> returnList = null;
-//
-//        if (city != null && area != null && keyword != null)
-//            list= exhibitionRepository.findByAllCategory(city, area, keyword);
-//        else if (city != null && area != null && keyword == null)
-//            list= exhibitionRepository.findByCityAndArea(city, area);
-//        else if (city != null && area == null && keyword == null)
-//            list= exhibitionRepository.findByCity(city);
-//        else if (city == null && area != null && keyword != null)
-//            list= exhibitionRepository.findByAreaAndKeyword(area, keyword);
-//        else if (city == null && area != null && keyword == null)
-//            list= exhibitionRepository.findByArea(area);
-//        else if (city != null && area == null && keyword != null)
-//            list= exhibitionRepository.findByCityAndKeyword(city, keyword);
-//        else if (city == null && area == null && keyword != null)
-//            list= exhibitionRepository.findByKeyword(keyword);
-//        else list= exhibitionRepository.findByProgress();
-//
-//        for(Exhibition exh : list){
-//            if(progressExhibition.contains(exh)) returnList.add(exh);
-//        }
-//
-//        return list;
-//    }
+    public Optional<Exhibition> findById(Long id){
+        return exhibitionRepository.findById(id);
+    }
 }

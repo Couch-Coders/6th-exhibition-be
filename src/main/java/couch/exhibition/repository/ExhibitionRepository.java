@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>, JpaSpecificationExecutor<Exhibition> {
@@ -38,4 +39,6 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>, J
     @Query("select m from Exhibition m where m.placeAddr like %:area% and (m.title like %:keyword% or m.place like %:keyword% or m.placeAddr like %:keyword%)")
     List<Exhibition> findByAreaAndKeyword(@Param("area") String area, @Param("keyword") String keyword);
 
+    @Override
+    Optional<Exhibition> findById(Long id);
 }

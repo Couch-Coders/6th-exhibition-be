@@ -33,6 +33,8 @@ public class MemberController {
     @PostMapping
     public MemberDto register(@RequestHeader("Authorization") String authorization) {
 
+
+
         //Token 획득
         FirebaseToken decodedToken;
         try {
