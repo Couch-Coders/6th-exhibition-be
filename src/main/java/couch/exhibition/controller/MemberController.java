@@ -28,8 +28,6 @@ public class MemberController {
     }
 
     //회원가입
-    @ResponseBody
-    //@RequestMapping(value = "", method = RequestMethod.POST)
     @PostMapping
     public MemberDto register(@RequestHeader("Authorization") String authorization) {
 
