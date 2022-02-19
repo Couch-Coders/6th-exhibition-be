@@ -1,6 +1,8 @@
 package couch.exhibition.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,11 +12,13 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"exhibitionReviews", "exhibitionLikes"})
-//@ToString(exclude = {"exhibitionReviews", "exhibitionLikes"})
+@SequenceGenerator(
+        name = "EXHIBITION_SEQ_GENERATOR",
+        sequenceName = "EXHIBITION_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Exhibition {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EXHIBITION_SEQ_GENERATOR")
     @Column(name = "exhibition_id")
     private Long id;
 
@@ -74,13 +78,6 @@ public class Exhibition {
         this.posterUrl = posterUrl;
         this.likeCnt = likeCnt;
     }
-
-
-
-
-//    public Exhibition() {
-//        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
-//    }
 
     public void setLikeCnt(Integer likeCnt) {
         this.likeCnt = likeCnt;

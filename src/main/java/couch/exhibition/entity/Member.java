@@ -34,15 +34,17 @@ public class Member implements UserDetails {
     private List<Review> memberReviews = new ArrayList<>();
 
     @Builder
-    public Member(String id, String memberName, String nickname) {
-        this.id = id;
+    public Member(String memberName, String nickname, String id) {
         this.memberName = memberName;
         this.nickname = nickname;
+        this.id = id;
     }
 
-//    public Member() {
-//        throw new RuntimeException("Member class는 기본 생성자를 지원하지 않습니다.");
-//    }
+    public void updateMember(Member updateMember) {
+        if (updateMember.getNickname() != null) {
+            nickname = updateMember.getNickname();
+        }
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -79,7 +81,4 @@ public class Member implements UserDetails {
         return false;
     }
 
-    public void editNickname(String nickname) {
-        this.nickname = nickname;
-    }
 }

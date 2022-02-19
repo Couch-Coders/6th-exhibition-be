@@ -2,14 +2,20 @@ package couch.exhibition.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@SequenceGenerator(
+        name = "LIKE_SEQ_GENERATOR",
+        sequenceName = "LIKE_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Likes {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKE_SEQ_GENERATOR")
     @Column(name = "likes_id")
     private Long id;
 
@@ -26,8 +32,3 @@ public class Likes {
         this.member = member;
         this.exhibition = exhibition;
     }
-
-//    public Likes() {
-//        throw new RuntimeException("Likes class는 기본 생성자를 지원하지 않습니다.");
-//    }
-}
