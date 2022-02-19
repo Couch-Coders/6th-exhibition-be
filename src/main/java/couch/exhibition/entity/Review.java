@@ -3,27 +3,35 @@ package couch.exhibition.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@SequenceGenerator(
+        name = "REVIEW_SEQ_GENERATOR",
+        sequenceName = "REVIEW_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Review {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ_GENERATOR")
     @Column(name = "review_id")
     private Long id;
 
     @Column(length = 1000)
     private String content;
 
-    @Column(name = "registered_date")
-    private LocalDate registeredDate;
+    @CreationTimestamp
+    @Column(name = "registered_date_time")
+    private LocalDateTime registeredDateTime = LocalDateTime.now();
 
-    @Column(name = "modified_date")
-    private LocalDate modifiedDate;
+    @UpdateTimestamp
+    @Column(name = "modified_date_time")
+    private LocalDateTime modifiedDateTime = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -34,16 +42,10 @@ public class Review {
     private Exhibition exhibition;
 
     @Builder
-    public Review(String content, LocalDate registeredDate, LocalDate modifiedDate,
-                   Member member, Exhibition exhibition) {
+    public Review(String content, Member member, Exhibition exhibition) {
         this.content = content;
-        this.registeredDate = registeredDate;
-        this.modifiedDate = modifiedDate;
         this.member = member;
         this.exhibition = exhibition;
     }
 
-//    public Review() {
-//        throw new RuntimeException("Review class는 기본 생성자를 지원하지 않습니다.");
-//    }
 }

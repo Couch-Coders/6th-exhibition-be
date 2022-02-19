@@ -12,9 +12,13 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@SequenceGenerator(
+        name = "EXHIBITION_SEQ_GENERATOR",
+        sequenceName = "EXHIBITION_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Exhibition {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EXHIBITION_SEQ_GENERATOR")
     @Column(name = "exhibition_id")
     private Long id;
 
