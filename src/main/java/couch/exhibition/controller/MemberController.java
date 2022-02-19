@@ -28,7 +28,7 @@ public class MemberController {
     }
 
     //회원가입
-    @PostMapping
+    @PostMapping("")
     public MemberDto register(@RequestHeader("Authorization") String authorization) {
 
         //Token 획득

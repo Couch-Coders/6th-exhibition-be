@@ -1,5 +1,6 @@
 package couch.exhibition.entity;
 
+import couch.exhibition.dto.ReviewRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,4 +49,7 @@ public class Review {
         this.exhibition = exhibition;
     }
 
+    public void updateReview(ReviewRequestDTO updateExhibitionReviewDTO) {
+        this.content = updateExhibitionReviewDTO.getContent();
+    }
 }

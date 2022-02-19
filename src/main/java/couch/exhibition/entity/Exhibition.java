@@ -79,10 +79,6 @@ public class Exhibition {
         this.likeCnt = likeCnt;
     }
 
-//    public Exhibition() {
-//        throw new RuntimeException("Exhibition class는 기본 생성자를 지원하지 않습니다.");
-//    }
-
     public void setLikeCnt(Integer likeCnt) {
         this.likeCnt = likeCnt;
     }
