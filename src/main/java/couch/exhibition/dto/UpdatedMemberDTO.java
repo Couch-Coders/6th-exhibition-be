@@ -9,3 +9,4 @@ public class UpdatedMemberDTO {
     private String memberName;
     private String nickname;
 }
+

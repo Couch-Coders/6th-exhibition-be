@@ -1,5 +1,6 @@
 package couch.exhibition.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,9 +54,11 @@ public class Exhibition {
     @Column(name = "like_count")
     private Integer likeCnt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
     private List<Likes> exhibitionLikes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
     private List<Review> exhibitionReviews = new ArrayList<>();
 
