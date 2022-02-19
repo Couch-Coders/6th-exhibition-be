@@ -4,32 +4,35 @@ import couch.exhibition.dto.ReviewRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@SequenceGenerator(
+        name = "REVIEW_SEQ_GENERATOR",
+        sequenceName = "REVIEW_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Review {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ_GENERATOR")
     @Column(name = "review_id")
     private Long id;
 
     @Column(length = 1000)
     private String content;
 
-    @Column(name = "registered_date")
-    @CreatedDate
-    private LocalDate registeredDate;
+    @CreationTimestamp
+    @Column(name = "registered_date_time")
+    private LocalDateTime registeredDateTime = LocalDateTime.now();
 
-    @Column(name = "modified_date")
-    @LastModifiedDate
-    private LocalDate modifiedDate;
+    @UpdateTimestamp
+    @Column(name = "modified_date_time")
+    private LocalDateTime modifiedDateTime = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -40,12 +43,8 @@ public class Review {
     private Exhibition exhibition;
 
     @Builder
-    public Review(Long id, String content, LocalDate registeredDate, LocalDate modifiedDate,
-                   Member member, Exhibition exhibition) {
-        this.id = id;
+    public Review(String content, Member member, Exhibition exhibition) {
         this.content = content;
-        this.registeredDate = registeredDate;
-        this.modifiedDate = modifiedDate;
         this.member = member;
         this.exhibition = exhibition;
     }

@@ -80,4 +80,5 @@ public class Member implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 }

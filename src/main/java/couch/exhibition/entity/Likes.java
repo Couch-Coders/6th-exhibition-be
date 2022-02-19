@@ -9,9 +9,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@SequenceGenerator(
+        name = "LIKE_SEQ_GENERATOR",
+        sequenceName = "LIKE_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Likes {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKE_SEQ_GENERATOR")
     @Column(name = "likes_id")
     private Long id;
 
@@ -28,5 +32,4 @@ public class Likes {
         this.member = member;
         this.exhibition = exhibition;
     }
-
 }
