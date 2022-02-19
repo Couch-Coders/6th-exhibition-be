@@ -1,7 +1,6 @@
 package couch.exhibition.controller;
 
 import couch.exhibition.entity.Exhibition;
-import couch.exhibition.repository.ExhibitionDBRepository;
 import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -22,11 +21,11 @@ import java.nio.charset.StandardCharsets;
 @Controller
 public class ExhibitionDBController {
 
-    private final ExhibitionDBRepository exhibitionDBRepository;
+    private final ExhibitionRepository exhibitionRepository;
 
     @Autowired
-    public ExhibitionDBController(ExhibitionDBRepository exhibitionDBRepository) {
-        this.exhibitionDBRepository = exhibitionDBRepository;
+    public ExhibitionDBController(ExhibitionRepository exhibitionRepository) {
+        this.exhibitionRepository = exhibitionRepository;
     }
 
     @GetMapping("/api")
@@ -59,7 +58,7 @@ public class ExhibitionDBController {
                     (String) perforInfo.get("url"), (String) perforInfo.get("price"),
                     (String) perforInfo.get("placeUrl"), (String) perforInfo.get("imgUrl"), 0);
 
-            exhibitionDBRepository.save(infoObj);
+            exhibitionRepository.save(infoObj);
 
         } catch(Exception e) {
             e.printStackTrace();

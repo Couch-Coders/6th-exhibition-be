@@ -81,4 +81,8 @@ public class Member implements UserDetails {
         return false;
     }
 
+
+    public void editNickname(String nickname) {
+
+    }
 }
