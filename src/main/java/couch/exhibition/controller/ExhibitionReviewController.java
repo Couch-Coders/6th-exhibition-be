@@ -39,9 +39,7 @@ public class ExhibitionReviewController {
     public void createExhibitionReview(@PathVariable("exhibitionId") Long exhibitionId,
                                        @RequestBody ReviewRequestDTO createExhibitionReviewDTO,
                                        Authentication authentication) {
-        log.info(String.valueOf(authentication));
         Member member = (Member) authentication.getPrincipal();
-        log.info(String.valueOf(member));
         exhibitionReviewService.postReview(member, exhibitionId, createExhibitionReviewDTO);
     }
 

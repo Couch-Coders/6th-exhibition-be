@@ -3,23 +3,23 @@ package couch.exhibition.dto;
 import couch.exhibition.entity.Review;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class ReviewResponseDTO {
 
     private Long reviewId;
     private String content;
-    private LocalDate registeredDate;
-    private LocalDate modifiedDate;
+    private LocalDateTime registeredDateTime;
+    private LocalDateTime modifiedDateTime;
     private String memberId;
     private Long exhibitionId;
 
     public ReviewResponseDTO(Review review) {
         this.reviewId = review.getId();
         this.content = review.getContent();
-        this.registeredDate = review.getRegisteredDate();
-        this.modifiedDate = review.getModifiedDate();
+        this.registeredDateTime = review.getRegisteredDateTime();
+        this.modifiedDateTime = review.getModifiedDateTime();
         this.memberId = review.getMember().getId();
         this.exhibitionId = review.getExhibition().getId();
     }

@@ -1,7 +1,7 @@
 package couch.exhibition.service;
 
 import couch.exhibition.dto.ReviewRequestDTO;
-import couch.exhibition.dto.ReviewPostResponseDTO;
+import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.entity.Member;
 import couch.exhibition.entity.Review;
@@ -9,11 +9,13 @@ import couch.exhibition.exception.CustomException;
 import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.repository.ExhibitionReviewRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class ExhibitionReviewService {
 
@@ -27,7 +29,7 @@ public class ExhibitionReviewService {
     }
 
     @Transactional
-    public ReviewPostResponseDTO postReview(Member member, Long exhibitionId, ReviewRequestDTO createExhibitionReviewDTO) {
+    public ReviewResponseDTO postReview(Member member, Long exhibitionId, ReviewRequestDTO createExhibitionReviewDTO) {
 
         judgeNotFoundExhibition(exhibitionId);
 
@@ -39,7 +41,7 @@ public class ExhibitionReviewService {
 
         exhibitionReviewRepository.save(review);
 
-        return new ReviewPostResponseDTO(review);
+        return new ReviewResponseDTO(review);
     }
 
     @Transactional
@@ -47,11 +49,15 @@ public class ExhibitionReviewService {
 
         judgeNotFoundExhibition(exhibitionId);
 
-        Review getReview = judgeNotFoundReview(reviewId);
+        Review review = judgeNotFoundReview(reviewId);
 
-        judgeForbiddenUser(member, getReview);
+        judgeForbiddenUser(member, review);
 
-        getReview.updateReview(updateExhibitionReviewDTO);
+        log.info(review.getContent());
+
+        review.updateReview(updateExhibitionReviewDTO);
+
+        log.info(review.getContent());
     }
 
     @Transactional
@@ -59,11 +65,11 @@ public class ExhibitionReviewService {
 
         judgeNotFoundExhibition(exhibitionId);
 
-        Review getReview = judgeNotFoundReview(reviewId);
+        Review review = judgeNotFoundReview(reviewId);
 
-        judgeForbiddenUser(member, getReview);
+        judgeForbiddenUser(member, review);
 
-        exhibitionReviewRepository.delete(getReview);
+        exhibitionReviewRepository.delete(review);
     }
 
     private void judgeForbiddenUser(Member member, Review getReview) {
