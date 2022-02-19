@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Controller
-public class ExhibitionController {
+public class ExhibitionDBController {
 
     @Autowired
     private ExhibitionRepository exhibitionRepository;
