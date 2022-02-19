@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/exhibitions")
+@RequestMapping("exhibitions/search")
 public class ExhibitionController {
 
     private final ExhibitionService exhibitionService;
