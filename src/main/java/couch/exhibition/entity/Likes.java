@@ -15,7 +15,8 @@ import javax.persistence.*;
         initialValue = 1, allocationSize = 1)
 public class Likes {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKE_SEQ_GENERATOR")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LIKE_SEQ_GENERATOR")
     @Column(name = "likes_id")
     private Long id;
 
@@ -32,3 +33,4 @@ public class Likes {
         this.member = member;
         this.exhibition = exhibition;
     }
+}
