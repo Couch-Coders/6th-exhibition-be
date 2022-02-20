@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
+@Transactional(readOnly = true)
 public class ExhibitionReviewService {
 
     private final ExhibitionRepository exhibitionRepository;
@@ -72,6 +73,14 @@ public class ExhibitionReviewService {
         exhibitionReviewRepository.delete(review);
     }
 
+    public Page<Review> getExhibitionReviewList(Exhibition exhibition, Pageable pageable) {
+        return exhibitionReviewRepository.findByExhibition(exhibition, pageable);
+    }
+
+    public Page<Review> getMyExhibitionReviewList(Member member, Pageable pageable) {
+        return exhibitionReviewRepository.findAllByMember(member, pageable);
+    }
+
     private void judgeForbiddenUser(Member member, Review getReview) {
         if (!getReview.getMember().getId().equals(member.getId())) {
             throw new CustomException(ErrorCode.FORBIDDEN_USER);
@@ -87,10 +96,6 @@ public class ExhibitionReviewService {
         if (exhibitionRepository.findById(exhibitionId).isEmpty()) {
             throw new CustomException(ErrorCode.NOT_FOUND_EXHIBITION);
         }
-    }
-
-    public Page<Review> getExhibitionReviewList(Exhibition exhibition, Pageable pageable) {
-        return exhibitionReviewRepository.findByExhibition(exhibition, pageable);
     }
 }
 

@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Transactional
 @Service
+@Transactional
 public class ExhibitionService {
 
     private final ExhibitionRepository exhibitionRepository;

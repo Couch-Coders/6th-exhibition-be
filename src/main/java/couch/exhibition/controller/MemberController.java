@@ -3,12 +3,21 @@ package couch.exhibition.controller;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+
 import couch.exhibition.dto.MemberDto;
+import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.dto.UpdatedMemberDTO;
 import couch.exhibition.entity.Member;
+import couch.exhibition.service.ExhibitionReviewService;
 import couch.exhibition.service.MemberService;
 import couch.exhibition.util.RequestUtil;
+
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +30,13 @@ public class MemberController {
 
     private final FirebaseAuth firebaseAuth;
     private final MemberService memberService;
+    private final ExhibitionReviewService exhibitionReviewService;
 
-    public MemberController(FirebaseAuth firebaseAuth, MemberService memberService) {
+    public MemberController(FirebaseAuth firebaseAuth, MemberService memberService,
+                            ExhibitionReviewService exhibitionReviewService) {
         this.firebaseAuth = firebaseAuth;
         this.memberService = memberService;
+        this.exhibitionReviewService = exhibitionReviewService;
     }
 
     //회원가입
@@ -65,5 +77,13 @@ public class MemberController {
     public void deleteRegisteredMember(Authentication authentication) {
         Member member = ((Member) authentication.getPrincipal());
         memberService.deleteMember(member.getId()); // 엔티티 직접 제거?
+    }
+
+    //나의 리뷰 조회
+    @GetMapping("/me/reviews")
+    public Page<ReviewResponseDTO> viewMyExhibitionReviews(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                                                           Authentication authentication) {
+        Member member = ((Member) authentication.getPrincipal());
+        return exhibitionReviewService.getMyExhibitionReviewList(member, pageable).map(review -> new ReviewResponseDTO(review));
     }
 }
