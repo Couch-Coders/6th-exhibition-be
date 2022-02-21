@@ -60,5 +60,8 @@ public class ExhibitionService {
         return exhibitionRepository.findById(id);
     }
 
+    public List<Exhibition> findTop10ByLikeCnt(){
+        return exhibitionRepository.findTop10ByOrderByLikeCntDesc();
+    }
 }
 

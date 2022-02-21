@@ -56,7 +56,7 @@ public class ExhibitionDBController {
                     (BigDecimal) perforInfo.get("gpsX"), (BigDecimal) perforInfo.get("gpsY"),
                     (Integer) perforInfo.get("startDate"), (Integer) perforInfo.get("endDate"),
                     (String) perforInfo.get("url"), (String) perforInfo.get("price"),
-                    (String) perforInfo.get("placeUrl"), (String) perforInfo.get("imgUrl"), 0);
+                    (String) perforInfo.get("placeUrl"), (String) perforInfo.get("imgUrl"));
 
             exhibitionRepository.save(infoObj);
 

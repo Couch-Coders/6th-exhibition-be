@@ -17,6 +17,7 @@ public enum ErrorCode {
     NOT_FOUND_USER(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
 
     EXIST_LIKED_EXHIBITION(HttpStatus.BAD_REQUEST, "이미 좋아요를 누른 전시회입니다."),
+    EXIST_LIKED_DELETE_EXHIBITION(HttpStatus.BAD_REQUEST, "이미 좋아요를 취소한 전시회입니다."),
 
     NOT_FOUND_EXHIBITION(HttpStatus.NOT_FOUND, "존재하지 않거나 마감된 전시회입니다."),
     NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다.");

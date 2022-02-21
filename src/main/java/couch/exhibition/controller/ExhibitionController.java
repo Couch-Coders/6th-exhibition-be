@@ -82,4 +82,9 @@ public class ExhibitionController {
     public Optional<Exhibition> exhibitionDetails(@PathVariable Long exhibitionId) {
         return exhibitionService.findById(exhibitionId);
     }
+
+    @GetMapping("/top10")
+    public List<Exhibition> exhibitionsTop10(){
+        return exhibitionService.findTop10ByLikeCnt();
+    }
 }

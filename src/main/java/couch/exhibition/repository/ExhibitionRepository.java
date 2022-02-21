@@ -41,4 +41,6 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>, J
 
     @Override
     Optional<Exhibition> findById(Long id);
+
+    List<Exhibition> findTop10ByOrderByLikeCntDesc();
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -51,6 +52,9 @@ public class Exhibition {
     @Column(name = "poster_url", length = 450)
     private String posterUrl;
 
+    @Formula("(select count(*) from Likes l where l.exhibition_id = exhibition_id)")
+    private int countLikes;
+
     @Column(name = "like_count")
     private Integer likeCnt;
 
@@ -62,12 +66,14 @@ public class Exhibition {
     @OneToMany(mappedBy = "exhibition", cascade = CascadeType.ALL)
     private List<Review> exhibitionReviews = new ArrayList<>();
 
+
+
     @Builder
     public Exhibition(String title, String place, String placeAddr,
                       BigDecimal latitude, BigDecimal longitude,
                       Integer startDate, Integer endDate,
                       String contactLink, String ticketPrice, String reservationLink,
-                      String posterUrl, Integer likeCnt) {
+                      String posterUrl) {
         this.title = title;
         this.place = place;
         this.placeAddr = placeAddr;
@@ -79,10 +85,10 @@ public class Exhibition {
         this.ticketPrice = ticketPrice;
         this.reservationLink = reservationLink;
         this.posterUrl = posterUrl;
-        this.likeCnt = likeCnt;
+        this.likeCnt = getCountLikes();
     }
 
     public void setLikeCnt(Integer likeCnt) {
-        this.likeCnt = likeCnt;
+        this.likeCnt = this.countLikes;
     }
 }
