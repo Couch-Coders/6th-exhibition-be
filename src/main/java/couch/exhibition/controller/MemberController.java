@@ -100,9 +100,9 @@ public class MemberController {
 
     //내가 좋아한 전시 조회
     @GetMapping("me/likes")
-    public List<Likes> listLikeExhibition(Authentication authentication) {
+    public Page<LikesDTO> listLikeExhibition(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
             Member member = ((Member) authentication.getPrincipal());
-            return likesService.listLikeExhibition(member);
+            return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
 
     //전시 좋아요 or 좋아요 취소

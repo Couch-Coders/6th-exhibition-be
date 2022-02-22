@@ -20,7 +20,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
     //@Query("select l from Likes l where l.member = :memberId and l.exhibition = :exhibitionId")
 
-    List<Likes> findByMember(Member member);
+    Page<Likes> findByMember(Member member, Pageable pageable);
 
     @Modifying
     @Query("UPDATE Exhibition e set e.likeCnt = :likeCnt where e.id= :exhibitionId")

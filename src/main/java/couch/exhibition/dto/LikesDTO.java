@@ -9,13 +9,13 @@ import lombok.Data;
 public class LikesDTO {
 
     private Long id;
-    private Member member;
-    private Exhibition exhibition;
+    private String memberId;
+    private Long exhibitionId;
 
     public LikesDTO(Likes like) {
         this.id = like.getId();
-        this.member = like.getMember();
-        this.exhibition = like.getExhibition();
+        this.memberId = like.getMember().getId();
+        this.exhibitionId = like.getExhibition().getId();
     }
 
 }

@@ -4,6 +4,7 @@ import couch.exhibition.dto.LikesDTO;
 import couch.exhibition.entity.Exhibition;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import couch.exhibition.entity.Likes;
 import couch.exhibition.entity.Member;
@@ -13,6 +14,7 @@ import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.repository.LikesRepository;
 import couch.exhibition.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,10 @@ public class LikesService {
         this.memberRepository = memberRepository;
     }
 
+    Pageable sortedByExhibitionsDescStartDateAsc =
+            PageRequest.of(0, 5, Sort.by("id").descending());
+
+
     @Transactional
     public LikesDTO createLike(Member member, Long exhibitionId){
 
@@ -43,7 +49,7 @@ public class LikesService {
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_EXHIBITION));
 
         //내가 좋아요한 전시회 리스트
-        List<Likes> likesList = likesRepository.findByMember(member);
+        Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
 
         int likeCnt = exhibition.getCountLikes();
 
@@ -72,7 +78,7 @@ public class LikesService {
 
         int likeCnt = exhibition.getCountLikes();
 
-        List<Likes> likesList = likesRepository.findByMember(member);
+        Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
 
         boolean flag = false;
         for(Likes like : likesList) {
@@ -88,13 +94,13 @@ public class LikesService {
         if(flag == false) throw new CustomException(ErrorCode.EXIST_LIKED_DELETE_EXHIBITION);
     }
 
-    public List<Likes> listLikeExhibition(Member member){
-        return likesRepository.findByMember(member);
+    public Page<Likes> listLikeExhibition(Member member, Pageable pageable){
+        return likesRepository.findByMember(member, pageable);
     }
 
     public void updateExhibitionLikeCnt(Exhibition exhibition,Member member){
         judgeNotFoundExhibition(exhibition.getId());
-        List<Likes> likesList = likesRepository.findByMember(member);
+        Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
         int likeCnt = exhibition.getCountLikes();
 
         for(Likes likes : likesList) {

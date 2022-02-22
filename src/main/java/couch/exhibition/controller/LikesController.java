@@ -1,18 +1,14 @@
 package couch.exhibition.controller;
 
-import couch.exhibition.dto.LikesDTO;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.entity.Member;
 import couch.exhibition.exception.CustomException;
 import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.service.ExhibitionService;
 import couch.exhibition.service.LikesService;
-import couch.exhibition.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Slf4j
 @RestController
