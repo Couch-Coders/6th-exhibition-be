@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/exhibitions/{exhibitionId}/reviews")
+@RequestMapping("/exhibitions/{exhibitionId}")
 public class ExhibitionReviewController {
 
     private final ExhibitionRepository exhibitionRepository;
@@ -28,7 +28,7 @@ public class ExhibitionReviewController {
         this.exhibitionReviewService = exhibitionReviewService;
     }
 
-    @GetMapping("") // exhibition id에 해당하는 리뷰 조회
+    @GetMapping("/viewAllReviews") // exhibition id에 해당하는 리뷰 조회
     public Page<ReviewResponseDTO> viewExhibitionReviews(@PathVariable("exhibitionId") Long exhibitionId,
                                                          @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Exhibition exhibition = exhibitionRepository.getById(exhibitionId);
@@ -43,7 +43,7 @@ public class ExhibitionReviewController {
         exhibitionReviewService.postReview(member, exhibitionId, createExhibitionReviewDTO);
     }
 
-    @PatchMapping("/{reviewId}") // 리뷰 수정
+    @PatchMapping("/reviews/{reviewId}") // 리뷰 수정
     public void updateExhibitionReview(@PathVariable("exhibitionId") Long exhibitionId,
                                        @PathVariable("reviewId") Long reviewId,
                                        @RequestBody ReviewRequestDTO updateExhibitionReviewDTO,
@@ -52,7 +52,7 @@ public class ExhibitionReviewController {
         exhibitionReviewService.updateReview(member, exhibitionId, reviewId, updateExhibitionReviewDTO);
     }
 
-    @DeleteMapping("/{reviewId}") // 리뷰 삭제
+    @DeleteMapping("/reviews/{reviewId}") // 리뷰 삭제
     public void deleteExhibitionReview(@PathVariable("exhibitionId") Long exhibitionId,
                                        @PathVariable("reviewId") Long reviewId,
                                        Authentication authentication) {
