@@ -8,6 +8,7 @@ import couch.exhibition.dto.MemberDto;
 import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.dto.UpdatedMemberDTO;
 import couch.exhibition.entity.Member;
+import couch.exhibition.repository.MemberRepository;
 import couch.exhibition.service.ExhibitionReviewService;
 import couch.exhibition.service.MemberService;
 import couch.exhibition.util.RequestUtil;
@@ -30,12 +31,14 @@ public class MemberController {
 
     private final FirebaseAuth firebaseAuth;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
     private final ExhibitionReviewService exhibitionReviewService;
 
     public MemberController(FirebaseAuth firebaseAuth, MemberService memberService,
-                            ExhibitionReviewService exhibitionReviewService) {
+                            MemberRepository memberRepository, ExhibitionReviewService exhibitionReviewService) {
         this.firebaseAuth = firebaseAuth;
         this.memberService = memberService;
+        this.memberRepository = memberRepository;
         this.exhibitionReviewService = exhibitionReviewService;
     }
 
@@ -76,7 +79,7 @@ public class MemberController {
     @DeleteMapping("/me")
     public void deleteRegisteredMember(Authentication authentication) {
         Member member = ((Member) authentication.getPrincipal());
-        memberService.deleteMember(member.getId()); // 엔티티 직접 제거?
+        memberService.deleteMember(member.getId());
     }
 
     //나의 리뷰 조회

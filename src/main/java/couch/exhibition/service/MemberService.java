@@ -26,6 +26,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 회원입니다."));
@@ -65,6 +66,6 @@ public class MemberService implements UserDetailsService {
     public void deleteMember(String id) throws CustomException {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.DELETED_USER));
-        memberRepository.delete(member); //entity 직접 제거?
+        memberRepository.delete(member);
     }
 }
