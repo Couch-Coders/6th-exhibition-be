@@ -54,11 +54,7 @@ public class ExhibitionReviewService {
 
         judgeForbiddenUser(member, review);
 
-        log.info(review.getContent());
-
         review.updateReview(updateExhibitionReviewDTO);
-
-        log.info(review.getContent());
     }
 
     @Transactional
@@ -81,8 +77,8 @@ public class ExhibitionReviewService {
         return exhibitionReviewRepository.findAllByMember(member, pageable);
     }
 
-    private void judgeForbiddenUser(Member member, Review getReview) {
-        if (!getReview.getMember().getId().equals(member.getId())) {
+    private void judgeForbiddenUser(Member member, Review review) {
+        if (!review.getMember().equals(member)) {
             throw new CustomException(ErrorCode.FORBIDDEN_USER);
         }
     }
