@@ -58,7 +58,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), decodedToken.getName(), decodedToken.getUid());
+                decodedToken.getName(), decodedToken.getEmail(), decodedToken.getUid());
         return new MemberDto(registeredMember);
     }
 

@@ -12,7 +12,7 @@ public class ReviewResponseDTO {
     private String content;
     private LocalDateTime registeredDateTime;
     private LocalDateTime modifiedDateTime;
-    private String memberId;
+    private String nickname;
     private Long exhibitionId;
 
     public ReviewResponseDTO(Review review) {
@@ -20,7 +20,7 @@ public class ReviewResponseDTO {
         this.content = review.getContent();
         this.registeredDateTime = review.getRegisteredDateTime();
         this.modifiedDateTime = review.getModifiedDateTime();
-        this.memberId = review.getMember().getId();
+        this.nickname = review.getMember().getNickname();
         this.exhibitionId = review.getExhibition().getId();
     }
 }

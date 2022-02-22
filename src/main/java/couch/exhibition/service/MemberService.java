@@ -51,14 +51,19 @@ public class MemberService implements UserDetailsService {
     public void editNickname(String id, UpdatedMemberDTO updatedMemberDTO) {
         Optional<Member> member = memberRepository.findById(id);
 
-        Member updatedMember = Member.builder()
-                .memberName(updatedMemberDTO.getMemberName())
-                .nickname(updatedMemberDTO.getNickname())
-                .id(updatedMemberDTO.getId())
-                .build();
+        if (memberRepository.findByNickname(updatedMemberDTO.getNickname()).isEmpty()) {
 
-        // Optional의 .get() function을 이용, memberRepository에 있는 member 객체 가져옴.
-        member.get().updateMember(updatedMember);
+            Member updatedMember = Member.builder()
+                    .memberName(updatedMemberDTO.getMemberName())
+                    .nickname(updatedMemberDTO.getNickname())
+                    .id(updatedMemberDTO.getId())
+                    .build();
+
+            // Optional의 .get() function을 이용, memberRepository에 있는 member 객체 가져옴.
+            member.get().updateMember(updatedMember);
+        } else {
+            throw new CustomException(ErrorCode.EXIST_NICKNAME);
+        }
     }
 
     //회원 탈퇴

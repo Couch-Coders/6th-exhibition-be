@@ -19,7 +19,8 @@ public enum ErrorCode {
     EXIST_LIKED_EXHIBITION(HttpStatus.BAD_REQUEST, "이미 좋아요를 누른 전시회입니다."),
 
     NOT_FOUND_EXHIBITION(HttpStatus.NOT_FOUND, "존재하지 않거나 마감된 전시회입니다."),
-    NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다.");
+    NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다."),
+    EXIST_NICKNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 닉네임입니다.");
 
     private final HttpStatus httpStatus;
     private final String message;
