@@ -1,8 +1,6 @@
 package couch.exhibition.controller;
 
 import couch.exhibition.dto.ExhibitionDto;
-import couch.exhibition.dto.LikesDTO;
-import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.exception.CustomException;
 import couch.exhibition.exception.ErrorCode;
@@ -10,9 +8,9 @@ import couch.exhibition.service.ExhibitionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +23,8 @@ public class ExhibitionController {
 
     private final ExhibitionService exhibitionService;
 
+
+
     @Autowired
     public ExhibitionController(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
@@ -33,11 +33,14 @@ public class ExhibitionController {
     @GetMapping("")
     public Page<ExhibitionDto> findByCategory(@RequestParam(value = "city", required = false) String city,
                                            @RequestParam(value = "area", required = false) String area,
-                                           @RequestParam(value = "keyword", required = false) String keyword,
-                                           @PageableDefault(sort = "end_date", direction = Sort.Direction.ASC) Pageable pageable){
+                                           @RequestParam(value = "keyword", required = false) String keyword){
+                                           //@PageableDefault(sort = "start_date", direction = Sort.Direction.ASC) Pageable pageable){
+
+        Pageable sortedByExhibitionsDescStartDateAsc =
+                PageRequest.of(1, 10, Sort.by("end_date").descending());
 
         log.info("/ 통과-1");
-        Page<ExhibitionDto> progressExhibition = exhibitionService.findByProgress(pageable).map(exhibition-> new ExhibitionDto(exhibition));
+        List<Exhibition> progressExhibition = exhibitionService.findByProgress();
         log.info("/ 통과0");
         Page<ExhibitionDto> list;
         List<ExhibitionDto> returnList = new ArrayList<>();
@@ -46,42 +49,44 @@ public class ExhibitionController {
 
         if(city != null && area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
-            list= exhibitionService.findByAllCategory(city, area, keyword, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByAllCategory(city, area, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
 
         }
         else if(city != null && area != null && keyword == null ) {
             log.info("findByCityAndArea(city, area) 통과");
-            list= exhibitionService.findByCityAndArea(city, area, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCityAndArea(city, area, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else if(city != null && area == null && keyword == null) {
             log.info("findByCity(city) 통과");
-            list= exhibitionService.findByCity(city, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCity(city,sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else if(city == null && area != null && keyword != null) {
             log.info("findByAreaAndKeyword(area, keyword) 통과");
-            list= exhibitionService.findByAreaAndKeyword(area, keyword, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByAreaAndKeyword(area, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else if(city == null && area != null && keyword == null) {
             log.info("exhibitionService.findByArea(area) 통과");
-            list= exhibitionService.findByArea(area, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByArea(area, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else if(city != null && area == null && keyword != null){
             log.info("findByCityAndKeyword(city, keyword) 통과");
-            list= exhibitionService.findByCityAndKeyword(city, keyword, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCityAndKeyword(city, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else if(city == null && area == null && keyword != null) {
             log.info("findByKeyword(keyword) 통과");
-            list= exhibitionService.findByKeyword(keyword, pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByKeyword(keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
         else {
             log.info("findByProgress 통과");
-            list= exhibitionService.findByProgress(pageable).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findAllExhibition(sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
         }
 
-        for(ExhibitionDto exh : progressExhibition) {
+        for(Exhibition exh : progressExhibition) {
+            int cnt = 0;
             for(ExhibitionDto listExh : list){
-                if (exh.equals(listExh)) {
-                    returnList.add(exh);
+                if (exh.getId() == listExh.getId()) {
+                    ExhibitionDto newExh = new ExhibitionDto(exh);
+                    returnList.add(newExh);
                 }
             }
         }

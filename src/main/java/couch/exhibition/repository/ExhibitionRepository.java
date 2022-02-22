@@ -4,7 +4,6 @@ import couch.exhibition.entity.Exhibition;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -14,15 +13,15 @@ import java.util.Optional;
 @Repository
 public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
 
-    @Query("select m from Exhibition m")
-    Page<Exhibition> findAllExhibition(Pageable pageable);
+    //@Query("select m from Exhibition m")
+    Page<Exhibition> findAll(Pageable pageable);
 
     @Query("select m from Exhibition m where m.title like %:keyword% or m.place like %:keyword%")
     Page<Exhibition> findByKeyword(@Param("keyword") String keyword,Pageable pageable);
 
     @Query(value = "select * from Exhibition where to_date(CAST(start_date AS TEXT), 'YYYYMMDD') <= current_date and current_date<=to_date(CAST(end_date AS TEXT), 'YYYYMMDD')"
-            ,countQuery = "select * from Exhibition where to_date(CAST(start_date AS TEXT), 'YYYYMMDD') <= current_date and current_date<=to_date(CAST(end_date AS TEXT), 'YYYYMMDD')",nativeQuery=true)
-    Page<Exhibition> findByProgress(Pageable pageable);
+            ,nativeQuery=true)
+    List<Exhibition> findByProgress();
 
     @Query("select m from Exhibition m where m.placeAddr like %:city%")
     Page<Exhibition> findByCity(@Param("city") String city, Pageable pageable); //시도별 검색 예) 서울시

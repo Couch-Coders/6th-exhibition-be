@@ -66,7 +66,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), decodedToken.getName(), decodedToken.getUid());
+                decodedToken.getName(), decodedToken.getEmail(), decodedToken.getUid());
         return new MemberDto(registeredMember);
     }
 
@@ -80,6 +80,7 @@ public class MemberController {
     @PatchMapping("/me")
     public void editNickname(Authentication authentication, @RequestBody UpdatedMemberDTO updatedMemberDTO) {
         Member member = ((Member) authentication.getPrincipal());
+
         memberService.editNickname(member.getId(), updatedMemberDTO);
     }
 
@@ -98,12 +99,20 @@ public class MemberController {
         return exhibitionReviewService.getMyExhibitionReviewList(member, pageable).map(review -> new ReviewResponseDTO(review));
     }
 
-    //내가 좋아한 전시 조회
+    //내가 좋아한 전시 조회(더보기)
     @GetMapping("me/likes")
     public Page<LikesDTO> listLikeExhibition(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
             Member member = ((Member) authentication.getPrincipal());
             return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
+
+    //내가 좋아한 전시 3개 미리보기
+    @GetMapping("me/likes3")
+    public Page<LikesDTO> listLike3Exhibition(@PageableDefault(direction = Sort.Direction.DESC, size = 3) Pageable pageable, Authentication authentication) {
+        Member member = ((Member) authentication.getPrincipal());
+        return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
+    }
+
 
     //전시 좋아요 or 좋아요 취소
 //    @DeleteMapping("me/likes/{likeId}")

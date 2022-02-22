@@ -37,12 +37,13 @@ public class LikesController {
         likesService.deleteLike(member, exhibitionId);
     }
 
-    @GetMapping("")
+    @GetMapping("/count")
     public int countLikes(@PathVariable Long exhibitionId){
         Exhibition exhibition = exhibitionService.findById(exhibitionId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_EXHIBITION));
         //likesService.updateExhibitionLikeCnt(exhibition);
         return likesService.countLikes(exhibition);
     }
+
 
 }

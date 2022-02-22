@@ -20,7 +20,6 @@ public class ExhibitionDto {
     private String ticketPrice;
     private String reservationLink;
     private String posterUrl;
-    private int countLikes;
     private Integer likeCnt;
 
     public ExhibitionDto(Exhibition exhibition) {

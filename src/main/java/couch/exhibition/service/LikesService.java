@@ -37,9 +37,6 @@ public class LikesService {
         this.memberRepository = memberRepository;
     }
 
-    Pageable sortedByExhibitionsDescStartDateAsc =
-            PageRequest.of(0, 5, Sort.by("id").descending());
-
 
     @Transactional
     public LikesDTO createLike(Member member, Long exhibitionId){
@@ -98,6 +95,7 @@ public class LikesService {
         return likesRepository.findByMember(member, pageable);
     }
 
+    @Transactional
     public void updateExhibitionLikeCnt(Exhibition exhibition,Member member){
         judgeNotFoundExhibition(exhibition.getId());
         Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());

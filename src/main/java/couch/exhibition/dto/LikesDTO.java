@@ -10,12 +10,12 @@ public class LikesDTO {
 
     private Long id;
     private String memberId;
-    private Long exhibitionId;
+    private Exhibition exhibition;
 
     public LikesDTO(Likes like) {
         this.id = like.getId();
         this.memberId = like.getMember().getId();
-        this.exhibitionId = like.getExhibition().getId();
+        this.exhibition = like.getExhibition();
     }
 
 }

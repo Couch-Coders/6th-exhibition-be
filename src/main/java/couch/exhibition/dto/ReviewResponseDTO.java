@@ -20,7 +20,7 @@ public class ReviewResponseDTO {
         this.content = review.getContent();
         this.registeredDateTime = review.getRegisteredDateTime();
         this.modifiedDateTime = review.getModifiedDateTime();
-        this.memberId = review.getMember().getId();
+        this.memberId = review.getMember().getNickname();
         this.exhibitionId = review.getExhibition().getId();
     }
 }

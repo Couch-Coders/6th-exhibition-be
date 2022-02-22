@@ -5,7 +5,9 @@ import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -18,6 +20,9 @@ public class ExhibitionService {
 
     private final ExhibitionRepository exhibitionRepository;
 
+    Pageable sortedByExhibitionsDescStartDateAsc =
+            PageRequest.of(1, 10, Sort.by("endDate").descending());
+
     @Autowired
     public ExhibitionService(ExhibitionRepository exhibitionRepository) {
         this.exhibitionRepository = exhibitionRepository;
@@ -27,8 +32,8 @@ public class ExhibitionService {
        return exhibitionRepository.findByKeyword(keyword, pageable);
     }
 
-    public Page<Exhibition> findByProgress(Pageable pageable){
-       return exhibitionRepository.findByProgress(pageable);
+    public List<Exhibition> findByProgress(){
+       return exhibitionRepository.findByProgress();
     }
 
     public Page<Exhibition> findByCity(String city, Pageable pageable){
@@ -44,7 +49,7 @@ public class ExhibitionService {
     }
 
     public Page<Exhibition> findAllExhibition(Pageable pageable){
-        return exhibitionRepository.findAllExhibition(pageable);
+        return exhibitionRepository.findAll(pageable);
     }
     public Page<Exhibition> findByAllCategory(String city, String area, String keyword, Pageable pageable){
         return exhibitionRepository.findByAllCategory(city, area, keyword, pageable);
