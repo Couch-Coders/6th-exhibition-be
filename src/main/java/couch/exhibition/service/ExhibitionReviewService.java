@@ -78,7 +78,7 @@ public class ExhibitionReviewService {
     }
 
     private void judgeForbiddenUser(Member member, Review review) {
-        if (!review.getMember().equals(member)) {
+        if (!review.getMember().getId().equals(member.getId())) {
             throw new CustomException(ErrorCode.FORBIDDEN_USER);
         }
     }

@@ -35,7 +35,7 @@ public class ExhibitionReviewController {
         return exhibitionReviewService.getExhibitionReviewList(exhibition, pageable).map(review -> new ReviewResponseDTO(review));
     }
 
-    @PostMapping("") // 리뷰 작성
+    @PostMapping("/reviews") // 리뷰 작성
     public void createExhibitionReview(@PathVariable("exhibitionId") Long exhibitionId,
                                        @RequestBody ReviewRequestDTO createExhibitionReviewDTO,
                                        Authentication authentication) {
