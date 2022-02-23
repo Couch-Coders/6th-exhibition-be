@@ -103,25 +103,16 @@ public class MemberController {
 
     //내가 좋아한 전시 조회(더보기)
     @GetMapping("me/likes")
-    public Page<LikesDTO> listLikeExhibition(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+    public Page<LikesDTO> listLikeExhibition(@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable, Authentication authentication) {
             Member member = ((Member) authentication.getPrincipal());
             return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
 
     //내가 좋아한 전시 3개 미리보기
     @GetMapping("me/likes3")
-    public Page<LikesDTO> listLike3Exhibition(@PageableDefault(direction = Sort.Direction.DESC, size = 3) Pageable pageable, Authentication authentication) {
+    public Page<LikesDTO> listLike3Exhibition(@PageableDefault(sort = "exhibitions.endDate", direction = Sort.Direction.ASC, size = 3) Pageable pageable, Authentication authentication) {
         Member member = ((Member) authentication.getPrincipal());
         return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
-
-
-    //전시 좋아요 or 좋아요 취소
-//    @DeleteMapping("me/likes/{likeId}")
-//    public void deleteLike(@PathVariable Long likeId, Authentication authentication) {
-//        Member member = ((Member) authentication.getPrincipal());
-//        Likes likes = likesService.findById(likeId).orElseThrow(() -> new CustomException(ErrorCode.EXIST_LIKED_DELETE_EXHIBITION));
-//        likesService.deleteLike(likes, member);
-//    }
 
 }

@@ -19,9 +19,6 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
     Optional<Likes> findById(Long likeId);
 
-    //@Query("select l from Likes l where l.member = :memberId and l.exhibition = :exhibitionId")
-
-   // @Query(value = "select l from Likes l, Exhibition e order by e.end_date asc" , nativeQuery = true)
     Page<Likes> findByMember(Member member, Pageable pageable);
 
     @Modifying
