@@ -35,15 +35,20 @@ public class MemberService implements UserDetailsService {
     //회원 등록
     @Transactional
     public Member register(String memberName, String nickname, String id) {
-        Member registeredMember = Member.builder()
-                .memberName(memberName)
-                .nickname(nickname)
-                .id(id)
-                .build();
 
-        memberRepository.save(registeredMember);
+        if (judgeIsDuplicatedNickname(nickname)) {
+            throw new CustomException(ErrorCode.EXIST_NICKNAME);
+        } else {
+            Member registeredMember = Member.builder()
+                    .memberName(memberName)
+                    .nickname(nickname)
+                    .id(id)
+                    .build();
 
-        return registeredMember;
+            memberRepository.save(registeredMember);
+
+            return registeredMember;
+        }
     }
 
     //닉네임 수정
@@ -70,5 +75,9 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public void deleteMember(String id) {
         memberRepository.delete(memberRepository.getById(id));
+    }
+
+    private boolean judgeIsDuplicatedNickname(String nickname) {
+        return memberRepository.findByNickname(nickname).isPresent();
     }
 }

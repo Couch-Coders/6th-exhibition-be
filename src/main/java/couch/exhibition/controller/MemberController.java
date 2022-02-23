@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
+import couch.exhibition.dto.CreateMemberDTO;
 import couch.exhibition.dto.MemberDto;
 import couch.exhibition.dto.ReviewResponseDTO;
 import couch.exhibition.dto.UpdatedMemberDTO;
@@ -44,7 +45,8 @@ public class MemberController {
 
     //회원가입
     @PostMapping("")
-    public MemberDto register(@RequestHeader("Authorization") String authorization) {
+    public MemberDto register(@RequestHeader("Authorization") String authorization,
+                              @RequestBody CreateMemberDTO createMemberDTO) {
 
         //Token 획득
         FirebaseToken decodedToken;
@@ -58,7 +60,7 @@ public class MemberController {
 
         //등록
         Member registeredMember = memberService.register(
-                decodedToken.getName(), decodedToken.getEmail(), decodedToken.getUid());
+                decodedToken.getName(), createMemberDTO.getNickname(), decodedToken.getUid());
         return new MemberDto(registeredMember);
     }
 
