@@ -7,6 +7,7 @@ import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.service.ExhibitionService;
 import couch.exhibition.service.LikesService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class LikesController {
     private final LikesService likesService;
     private final ExhibitionService exhibitionService;
 
+    @Autowired
     public LikesController(LikesService likesService, ExhibitionService exhibitionService) {
         this.likesService = likesService;
         this.exhibitionService = exhibitionService;

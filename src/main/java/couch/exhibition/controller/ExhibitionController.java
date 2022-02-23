@@ -37,12 +37,12 @@ public class ExhibitionController {
                                            @RequestParam(value = "keyword", required = false) String keyword,
                                            @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable){
 
-//        Pageable pageable2 =
-//                PageRequest.of(0, 5, Sort.by("start_date").descending());
+        Pageable pageable2 =
+                PageRequest.of(0, 10, Sort.by("start_date").descending());
 
 
         log.info("/ 통과-1");
-        List<Exhibition> progressExhibition = exhibitionService.findByProgress();
+        List<Exhibition> progressExhibition = exhibitionService.findByProgress(pageable2);
         log.info("/ 통과0");
         List<Exhibition> list;
         List<Exhibition> returnList = new ArrayList<>();
@@ -83,13 +83,13 @@ public class ExhibitionController {
             list = exhibitionService.findAllExhibitions(pageable);
         }
 
-        for(Exhibition exh : list){
-            if(progressExhibition.contains(exh)){
-                returnList.add(exh);
-            }
-        }
+//        for(Exhibition exh : list){
+//            if(progressExhibition.contains(exh)){
+//                returnList.add(exh);
+//            }
+//        }
 
-        if(returnList != null) return returnList;
+        if(list != null) return list;
         else throw new CustomException(ErrorCode.NOT_FOUND_EXHIBITION);
     }
 

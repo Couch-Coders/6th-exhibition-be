@@ -24,7 +24,7 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
 
     @Query(value = "select * from Exhibition where to_date(CAST(start_date AS TEXT), 'YYYYMMDD') <= current_date and current_date<=to_date(CAST(end_date AS TEXT), 'YYYYMMDD')"
             ,nativeQuery=true)
-    List<Exhibition> findByProgress();
+    List<Exhibition> findByProgress(Pageable pageable);
 
     @Query("select m from Exhibition m where m.placeAddr like %:city%")
     List<Exhibition> findByCity(@Param("city") String city, Pageable pageable); //시도별 검색 예) 서울시

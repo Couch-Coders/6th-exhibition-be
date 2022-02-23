@@ -22,9 +22,6 @@ public class ExhibitionService {
 
     private final ExhibitionRepository exhibitionRepository;
 
-    Pageable sortedByExhibitionsDescStartDateAsc =
-            PageRequest.of(1, 10, Sort.by("endDate").descending());
-
     @Autowired
     public ExhibitionService(ExhibitionRepository exhibitionRepository) {
         this.exhibitionRepository = exhibitionRepository;
@@ -38,8 +35,8 @@ public class ExhibitionService {
        return exhibitionRepository.findByKeyword(keyword, pageable);
     }
 
-    public List<Exhibition> findByProgress(){
-       return exhibitionRepository.findByProgress();
+    public List<Exhibition> findByProgress(Pageable pageable){
+       return exhibitionRepository.findByProgress(pageable);
     }
 
     public List<Exhibition> findByCity(String city,Pageable pageable){

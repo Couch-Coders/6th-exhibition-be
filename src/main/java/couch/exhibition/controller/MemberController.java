@@ -20,6 +20,7 @@ import couch.exhibition.util.RequestUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -42,6 +43,7 @@ public class MemberController {
     private final ExhibitionReviewService exhibitionReviewService;
     private final LikesService likesService;
 
+    @Autowired
     public MemberController(FirebaseAuth firebaseAuth, MemberService memberService,
                             ExhibitionReviewService exhibitionReviewService, LikesService likesService) {
         this.firebaseAuth = firebaseAuth;
