@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -41,7 +42,7 @@ public class JwtFilter extends OncePerRequestFilter{
             decodedToken = firebaseAuth.verifyIdToken(header);
             log.info(String.valueOf(decodedToken.getUid()));
         } catch (FirebaseAuthException | IllegalArgumentException e) {
-            // ErrorMessage 응답 전송
+            // invalid token의 경우 에러 응답 전송
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"code\":\"INVALID_TOKEN\", \"message\":\"" + e.getMessage() + "\"}");
@@ -56,8 +57,8 @@ public class JwtFilter extends OncePerRequestFilter{
                     user, null, user.getAuthorities());
             log.info(String.valueOf(authentication));
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch(NoSuchElementException e){
-            // ErrorMessage 응답 전송
+        } catch (UsernameNotFoundException e) {
+            // loadUserByUsername error시 터짐
             response.setStatus(HttpStatus.SC_NOT_FOUND);
             response.setContentType("application/json");
             response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");

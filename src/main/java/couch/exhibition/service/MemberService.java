@@ -68,9 +68,7 @@ public class MemberService implements UserDetailsService {
 
     //회원 탈퇴
     @Transactional
-    public void deleteMember(String id) throws CustomException {
-        Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ErrorCode.DELETED_USER));
-        memberRepository.delete(member);
+    public void deleteMember(String id) {
+        memberRepository.delete(memberRepository.getById(id));
     }
 }
