@@ -52,8 +52,8 @@ public class Exhibition {
     @Column(name = "poster_url", length = 450)
     private String posterUrl;
 
-    @Formula("(select count(*) from Likes l where l.exhibition_id = exhibition_id)")
-    private int countLikes;
+//    @Formula("(select count(*) from Likes l where l.exhibition_id = exhibition_id)")
+//    private int countLikes;
 
     @Column(name = "like_count")
     private Integer likeCnt;
@@ -73,7 +73,7 @@ public class Exhibition {
                       BigDecimal latitude, BigDecimal longitude,
                       Integer startDate, Integer endDate,
                       String contactLink, String ticketPrice, String reservationLink,
-                      String posterUrl) {
+                      String posterUrl, Integer likeCnt) {
         this.title = title;
         this.place = place;
         this.placeAddr = placeAddr;
@@ -85,10 +85,10 @@ public class Exhibition {
         this.ticketPrice = ticketPrice;
         this.reservationLink = reservationLink;
         this.posterUrl = posterUrl;
-        this.likeCnt = getCountLikes();
+        this.likeCnt = likeCnt;
     }
 
-    public void setLikeCnt(Integer likeCnt) {
-        this.likeCnt = this.countLikes;
-    }
+//    public void setLikeCnt(Integer likeCnt) {
+//        this.likeCnt = this.countLikes;
+//    }
 }

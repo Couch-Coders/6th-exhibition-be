@@ -11,10 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
+import java.sql.Array;
+import java.util.*;
+import java.util.function.Function;
 
 @Slf4j
 @RestController
@@ -23,75 +26,70 @@ public class ExhibitionController {
 
     private final ExhibitionService exhibitionService;
 
-
-
     @Autowired
     public ExhibitionController(ExhibitionService exhibitionService) {
         this.exhibitionService = exhibitionService;
     }
 
     @GetMapping("")
-    public Page<ExhibitionDto> findByCategory(@RequestParam(value = "city", required = false) String city,
+    public List<Exhibition> findByCategory(@RequestParam(value = "city", required = false) String city,
                                            @RequestParam(value = "area", required = false) String area,
-                                           @RequestParam(value = "keyword", required = false) String keyword){
-                                           //@PageableDefault(sort = "start_date", direction = Sort.Direction.ASC) Pageable pageable){
+                                           @RequestParam(value = "keyword", required = false) String keyword,
+                                           @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable){
 
-        Pageable sortedByExhibitionsDescStartDateAsc =
-                PageRequest.of(1, 10, Sort.by("end_date").descending());
+//        Pageable pageable2 =
+//                PageRequest.of(0, 5, Sort.by("start_date").descending());
+
 
         log.info("/ 통과-1");
         List<Exhibition> progressExhibition = exhibitionService.findByProgress();
         log.info("/ 통과0");
-        Page<ExhibitionDto> list;
-        List<ExhibitionDto> returnList = new ArrayList<>();
+        List<Exhibition> list;
+        List<Exhibition> returnList = new ArrayList<>();
 
         log.info("/ 통과1");
 
         if(city != null && area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
-            list= exhibitionService.findByAllCategory(city, area, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByAllCategory(city, area, keyword, pageable);
 
         }
         else if(city != null && area != null && keyword == null ) {
             log.info("findByCityAndArea(city, area) 통과");
-            list= exhibitionService.findByCityAndArea(city, area, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCityAndArea(city, area, pageable);
         }
         else if(city != null && area == null && keyword == null) {
             log.info("findByCity(city) 통과");
-            list= exhibitionService.findByCity(city,sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCity(city, pageable);
         }
         else if(city == null && area != null && keyword != null) {
             log.info("findByAreaAndKeyword(area, keyword) 통과");
-            list= exhibitionService.findByAreaAndKeyword(area, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByAreaAndKeyword(area, keyword, pageable);
         }
         else if(city == null && area != null && keyword == null) {
             log.info("exhibitionService.findByArea(area) 통과");
-            list= exhibitionService.findByArea(area, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByArea(area, pageable);
         }
         else if(city != null && area == null && keyword != null){
             log.info("findByCityAndKeyword(city, keyword) 통과");
-            list= exhibitionService.findByCityAndKeyword(city, keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByCityAndKeyword(city, keyword, pageable);
         }
         else if(city == null && area == null && keyword != null) {
             log.info("findByKeyword(keyword) 통과");
-            list= exhibitionService.findByKeyword(keyword, sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            list= exhibitionService.findByKeyword(keyword, pageable);
         }
         else {
-            log.info("findByProgress 통과");
-            list= exhibitionService.findAllExhibition(sortedByExhibitionsDescStartDateAsc).map(exhibition-> new ExhibitionDto(exhibition));
+            log.info("findAllExhibitions 통과");
+            list = exhibitionService.findAllExhibitions(pageable);
         }
 
-        for(Exhibition exh : progressExhibition) {
-            int cnt = 0;
-            for(ExhibitionDto listExh : list){
-                if (exh.getId() == listExh.getId()) {
-                    ExhibitionDto newExh = new ExhibitionDto(exh);
-                    returnList.add(newExh);
-                }
+        for(Exhibition exh : list){
+            if(progressExhibition.contains(exh)){
+                returnList.add(exh);
             }
         }
 
-        if(returnList != null) return (Page<ExhibitionDto>) returnList;
+        if(returnList != null) return returnList;
         else throw new CustomException(ErrorCode.NOT_FOUND_EXHIBITION);
     }
 

@@ -34,15 +34,20 @@ public class MemberService implements UserDetailsService {
     //회원 등록
     @Transactional
     public Member register(String memberName, String nickname, String id) {
-        Member registeredMember = Member.builder()
-                .memberName(memberName)
-                .nickname(nickname)
-                .id(id)
-                .build();
 
-        memberRepository.save(registeredMember);
+        if(memberRepository.findByNickname(nickname).isEmpty()) {
 
-        return registeredMember;
+            Member registeredMember = Member.builder()
+                    .memberName(memberName)
+                    .nickname(nickname)
+                    .id(id)
+                    .build();
+
+            memberRepository.save(registeredMember);
+            return registeredMember;
+        }else {
+            throw new CustomException(ErrorCode.EXIST_NICKNAME);
+        }
     }
 
     //닉네임 수정

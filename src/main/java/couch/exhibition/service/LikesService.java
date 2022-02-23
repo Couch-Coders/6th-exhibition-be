@@ -48,7 +48,7 @@ public class LikesService {
         //내가 좋아요한 전시회 리스트
         Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
 
-        int likeCnt = exhibition.getCountLikes();
+        int likeCnt = exhibition.getLikeCnt();
 
         Likes saveLike = Likes.builder()
                 .exhibition(exhibitionRepository.getById(exhibitionId))
@@ -73,7 +73,7 @@ public class LikesService {
         Exhibition exhibition = exhibitionRepository.findById(exhibitionId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_EXHIBITION));
 
-        int likeCnt = exhibition.getCountLikes();
+        int likeCnt = exhibition.getLikeCnt();
 
         Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
 
@@ -99,7 +99,7 @@ public class LikesService {
     public void updateExhibitionLikeCnt(Exhibition exhibition,Member member){
         judgeNotFoundExhibition(exhibition.getId());
         Page<Likes> likesList = likesRepository.findByMember(member, Pageable.unpaged());
-        int likeCnt = exhibition.getCountLikes();
+        int likeCnt = exhibition.getLikeCnt();
 
         for(Likes likes : likesList) {
             if (likes.getExhibition().equals(exhibition)) {
@@ -114,7 +114,7 @@ public class LikesService {
     }
 
     public int countLikes(Exhibition exhibition){
-        return exhibition.getCountLikes();
+        return exhibition.getLikeCnt();
     }
 
     public Optional<Likes> findById(Long likesId){

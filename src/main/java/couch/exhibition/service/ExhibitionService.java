@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,11 @@ public class ExhibitionService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    public Page<Exhibition> findByKeyword(String keyword, Pageable pageable){
+    public List<Exhibition> findAllExhibitions(Pageable pageable){
+        return exhibitionRepository.findAllExhibitions(pageable);
+    }
+
+    public List<Exhibition> findByKeyword(String keyword,Pageable pageable){
        return exhibitionRepository.findByKeyword(keyword, pageable);
     }
 
@@ -36,30 +42,30 @@ public class ExhibitionService {
        return exhibitionRepository.findByProgress();
     }
 
-    public Page<Exhibition> findByCity(String city, Pageable pageable){
+    public List<Exhibition> findByCity(String city,Pageable pageable){
         return exhibitionRepository.findByCity(city, pageable);
     }
 
-    public Page<Exhibition> findByArea(String area, Pageable pageable){
+    public List<Exhibition> findByArea(String area,Pageable pageable){
         return exhibitionRepository.findByArea(area, pageable);
     }
 
-    public Page<Exhibition> findByCityAndArea(String city, String area, Pageable pageable){
+    public List<Exhibition> findByCityAndArea(String city, String area,Pageable pageable){
         return exhibitionRepository.findByCityAndArea(city, area, pageable);
     }
 
-    public Page<Exhibition> findAllExhibition(Pageable pageable){
+    public Page<Exhibition> findAll(Pageable pageable){
         return exhibitionRepository.findAll(pageable);
     }
-    public Page<Exhibition> findByAllCategory(String city, String area, String keyword, Pageable pageable){
+    public List<Exhibition> findByAllCategory(String city, String area, String keyword, Pageable pageable){
         return exhibitionRepository.findByAllCategory(city, area, keyword, pageable);
     }
 
-    public Page<Exhibition> findByAreaAndKeyword(String area, String keyword, Pageable pageable){
+    public List<Exhibition> findByAreaAndKeyword(String area, String keyword,Pageable pageable){
         return exhibitionRepository.findByAreaAndKeyword(area, keyword, pageable);
     }
 
-    public Page<Exhibition> findByCityAndKeyword(String city, String keyword, Pageable pageable){
+    public List<Exhibition> findByCityAndKeyword(String city, String keyword,Pageable pageable){
         return exhibitionRepository.findByCityAndKeyword(city, keyword, pageable);
     }
 
@@ -70,5 +76,6 @@ public class ExhibitionService {
     public List<Exhibition> findTop10ByLikeCnt(){
         return exhibitionRepository.findTop10ByOrderByLikeCntDesc();
     }
+
 }
 
