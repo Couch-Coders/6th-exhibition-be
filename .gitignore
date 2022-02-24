@@ -38,3 +38,5 @@ out/
 
 ### DS_STORE ###
 *.DS_Store
+
+serviceAccountKey.json
