@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -82,7 +81,4 @@ public class Exhibition {
         this.likeCnt = likeCnt;
     }
 
-    public void setLikeCnt(Integer likeCnt) {
-        this.likeCnt = likeCnt;
-    }
 }

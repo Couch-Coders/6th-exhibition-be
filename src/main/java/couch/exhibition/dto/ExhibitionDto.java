@@ -1,27 +1,41 @@
 package couch.exhibition.dto;
 
+import couch.exhibition.entity.Exhibition;
 import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Data
 public class ExhibitionDto {
 
-    @Id @GeneratedValue
     private Long id;
     private String title;
     private String place;
-    private String city;
+    private String placeAddr;
     private BigDecimal latitude;
     private BigDecimal longitude;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private Integer startDate;
+    private Integer endDate;
     private String contactLink;
     private String ticketPrice;
     private String reservationLink;
     private String posterUrl;
-    private boolean progress;
     private Integer likeCnt;
+
+    public ExhibitionDto(Exhibition exhibition) {
+        this.id = exhibition.getId();
+        this.title = exhibition.getTitle();
+        this.place = exhibition.getPlace();
+        this.placeAddr = exhibition.getPlaceAddr();
+        this.latitude = exhibition.getLatitude();
+        this.longitude = exhibition.getLongitude();
+        this.startDate = exhibition.getStartDate();
+        this.endDate = exhibition.getEndDate();
+        this.contactLink = exhibition.getContactLink();
+        this.ticketPrice = exhibition.getTicketPrice();
+        this.reservationLink = exhibition.getReservationLink();
+        this.posterUrl = exhibition.getPosterUrl();
+        this.likeCnt = exhibition.getLikeCnt();
+    }
 
 }

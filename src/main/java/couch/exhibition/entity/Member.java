@@ -1,5 +1,6 @@
 package couch.exhibition.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.firebase.database.annotations.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,9 +28,11 @@ public class Member implements UserDetails {
 
     private String nickname;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Likes> memberLikes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Review> memberReviews = new ArrayList<>();
 

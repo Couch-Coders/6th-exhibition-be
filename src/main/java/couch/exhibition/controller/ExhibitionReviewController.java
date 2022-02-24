@@ -7,6 +7,7 @@ import couch.exhibition.entity.Member;
 import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.service.ExhibitionReviewService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ public class ExhibitionReviewController {
     private final ExhibitionRepository exhibitionRepository;
     private final ExhibitionReviewService exhibitionReviewService;
 
+    @Autowired
     public ExhibitionReviewController(ExhibitionRepository exhibitionRepository,
                                       ExhibitionReviewService exhibitionReviewService) {
         this.exhibitionRepository = exhibitionRepository;

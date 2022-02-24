@@ -7,6 +7,7 @@ import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +22,7 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -56,7 +58,8 @@ public class MemberService implements UserDetailsService {
     public void editNickname(String id, UpdatedMemberDTO updatedMemberDTO) {
         Optional<Member> member = memberRepository.findById(id);
 
-        if (memberRepository.findByNickname(updatedMemberDTO.getNickname()).isEmpty()) {
+        if(memberRepository.findByNickname(updatedMemberDTO.getNickname()).isEmpty()) {
+
 
             Member updatedMember = Member.builder()
                     .memberName(updatedMemberDTO.getMemberName())
@@ -66,7 +69,9 @@ public class MemberService implements UserDetailsService {
 
             // Optional의 .get() function을 이용, memberRepository에 있는 member 객체 가져옴.
             member.get().updateMember(updatedMember);
+
         } else {
+
             throw new CustomException(ErrorCode.EXIST_NICKNAME);
         }
     }
@@ -76,8 +81,8 @@ public class MemberService implements UserDetailsService {
     public void deleteMember(String id) {
         memberRepository.delete(memberRepository.getById(id));
     }
-
     private boolean judgeIsDuplicatedNickname(String nickname) {
         return memberRepository.findByNickname(nickname).isPresent();
     }
+
 }

@@ -10,6 +10,7 @@ import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.repository.ExhibitionReviewRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class ExhibitionReviewService {
     private final ExhibitionRepository exhibitionRepository;
     private final ExhibitionReviewRepository exhibitionReviewRepository;
 
+    @Autowired
     public ExhibitionReviewService(ExhibitionRepository exhibitionRepository,
                                    ExhibitionReviewRepository exhibitionReviewRepository) {
         this.exhibitionRepository = exhibitionRepository;

@@ -4,6 +4,8 @@ import couch.exhibition.entity.Exhibition;
 import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -21,43 +23,47 @@ public class ExhibitionService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    public List<Exhibition> findByKeyword(String keyword){
-       return exhibitionRepository.findByKeyword(keyword);
+    public List<Exhibition> findAllExhibitions(int today, Pageable pageable){
+        return exhibitionRepository.findAllExhibitions(today, pageable);
     }
 
-    public List<Exhibition> findByProgress(){
-       return exhibitionRepository.findByProgress();
+    public List<Exhibition> findByKeyword(String keyword,int today, Pageable pageable){
+       return exhibitionRepository.findByKeyword(keyword, today, pageable);
     }
 
-    public List<Exhibition> findByCity(String city){
-        return exhibitionRepository.findByCity(city);
+    public List<Exhibition> findByCity(String city,int today,Pageable pageable){
+        return exhibitionRepository.findByCity(city, today, pageable);
     }
 
-    public List<Exhibition> findByArea(String area){
-        return exhibitionRepository.findByArea(area);
+    public List<Exhibition> findByArea(String area,int today,Pageable pageable){
+        return exhibitionRepository.findByArea(area,today, pageable);
     }
 
-    public List<Exhibition> findByCityAndArea(String city, String area){
-        return exhibitionRepository.findByCityAndArea(city, area);
+    public List<Exhibition> findByCityAndArea(String city, String area,int today,Pageable pageable){
+        return exhibitionRepository.findByCityAndArea(city, area, today,pageable);
     }
 
-    public List<Exhibition> findAllExhibition(){
-        return exhibitionRepository.findAllExhibition();
+    public Page<Exhibition> findAll(Pageable pageable){
+        return exhibitionRepository.findAll(pageable);
     }
-    public List<Exhibition> findByAllCategory(String city, String area, String keyword){
-        return exhibitionRepository.findByAllCategory(city, area, keyword);
-    }
-
-    public List<Exhibition> findByAreaAndKeyword(String area, String keyword){
-        return exhibitionRepository.findByAreaAndKeyword(area, keyword);
+    public List<Exhibition> findByAllCategory(String city, String area, String keyword, int today,Pageable pageable){
+        return exhibitionRepository.findByAllCategory(city, area, keyword, today,pageable);
     }
 
-    public List<Exhibition> findByCityAndKeyword(String city, String keyword){
-        return exhibitionRepository.findByCityAndKeyword(city, keyword);
+    public List<Exhibition> findByAreaAndKeyword(String area, String keyword,int today,Pageable pageable){
+        return exhibitionRepository.findByAreaAndKeyword(area, keyword, today,pageable);
+    }
+
+    public List<Exhibition> findByCityAndKeyword(String city, String keyword,int today,Pageable pageable){
+        return exhibitionRepository.findByCityAndKeyword(city, keyword, today,pageable);
     }
 
     public Optional<Exhibition> findById(Long id){
         return exhibitionRepository.findById(id);
+    }
+
+    public List<Exhibition> findTop10ByLikeCnt(){
+        return exhibitionRepository.findTop10ByOrderByLikeCntDesc();
     }
 
 }
