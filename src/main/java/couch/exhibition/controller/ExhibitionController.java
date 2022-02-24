@@ -36,7 +36,7 @@ public class ExhibitionController {
 
 
        today  = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-       Integer todayToInt = Integer.parseInt(today);
+       int todayToInt = Integer.parseInt(today);
 
         log.info("/ 통과 "+ todayToInt);
         List<Exhibition> list;

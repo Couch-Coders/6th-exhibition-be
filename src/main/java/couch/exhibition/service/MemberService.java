@@ -37,8 +37,9 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public Member register(String memberName, String nickname, String id) {
 
-        if(memberRepository.findByNickname(nickname).isEmpty()) {
-
+        if (judgeIsDuplicatedNickname(nickname)) {
+            throw new CustomException(ErrorCode.EXIST_NICKNAME);
+        } else {
             Member registeredMember = Member.builder()
                     .memberName(memberName)
                     .nickname(nickname)
@@ -46,9 +47,8 @@ public class MemberService implements UserDetailsService {
                     .build();
 
             memberRepository.save(registeredMember);
+
             return registeredMember;
-        }else {
-            throw new CustomException(ErrorCode.EXIST_NICKNAME);
         }
     }
 
@@ -78,5 +78,9 @@ public class MemberService implements UserDetailsService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.DELETED_USER));
         memberRepository.delete(member); //entity 직접 제거?
+    }
+
+    private boolean judgeIsDuplicatedNickname(String nickname) {
+        return memberRepository.findByNickname(nickname).isPresent();
     }
 }

@@ -52,9 +52,6 @@ public class Exhibition {
     @Column(name = "poster_url", length = 450)
     private String posterUrl;
 
-//    @Formula("(select count(*) from Likes l where l.exhibition_id = exhibition_id)")
-//    private int countLikes;
-
     @Column(name = "like_count")
     private Integer likeCnt;
 
