@@ -23,7 +23,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
     @Modifying
     @Query("UPDATE Exhibition e set e.likeCnt = :likeCnt where e.id= :exhibitionId")
-    void updateExhibitionCount(@Param("exhibitionId") Long exhibitionId, int likeCnt);
+    void updateExhibitionCount(@Param("exhibitionId") Long exhibitionId, @Param("likeCnt") int likeCnt);
 
 
 }
