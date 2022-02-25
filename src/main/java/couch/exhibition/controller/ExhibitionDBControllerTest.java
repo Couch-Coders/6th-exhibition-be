@@ -35,38 +35,44 @@ public class ExhibitionDBControllerTest {
     @Scheduled(cron = "0 0 0 * * *") // 추가 설정(매일 자정에 실행)
     public void load_save() throws IOException { // try문?
 
-        String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D"; // 처리
-        URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/realm?" +
-                "serviceKey=" + serviceKey +
-                "&from=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
-                "&to=" + LocalDate.now().plusYears(3).format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
-                "&realmCode=D000");
+//        String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D"; // 처리
+        String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
 
-        JSONObject msgBody = getMsgBody(url);
+        for (int pageNo = 1; pageNo <= 5; pageNo++) {
+            URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/realm?" +
+                    "serviceKey=" + serviceKey +
+                    "&from=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                    "&to=" + LocalDate.now().plusYears(3).format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                    "&realmCode=D000" +
+                    "&cPage=" + pageNo
+            );
 
-        JSONArray perforList = (JSONArray) msgBody.get("perforList");
+            JSONObject msgBody = getMsgBody(url);
 
-        log.info(String.valueOf(perforList.getJSONObject(0)));
+            JSONArray perforList = (JSONArray) msgBody.get("perforList");
 
-        List<Integer> seqList = new ArrayList<>();
-        for (Object performance : perforList) {
+            log.info(String.valueOf(perforList));
 
-            seqList.add((Integer) performance);
+            List<Integer> seqList = new ArrayList<>();
+            for (int index = 0; index < perforList.length(); index++) {
+                Integer sequence = (Integer) perforList.getJSONObject(index).get("seq");
+                seqList.add(sequence);
+            }
+
+            log.info(String.valueOf(seqList.size()));
+
+            log.info("ok1");
+
+            getDBData(seqList);
         }
-
-        //(Integer) performance.get("seq")
-
-        log.info("ok1");
-
-        getDBData(seqList);
-
     }
 
     private void getDBData(List<Integer> seqList) {
 
         for (Integer seq : seqList) {
             try {
-                String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D";
+//                String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D";
+                String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
                 URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/?" +
                         "serviceKey=" + serviceKey + "&seq=" + seq); // seq 타입?
 
@@ -80,7 +86,9 @@ public class ExhibitionDBControllerTest {
                         (String) perforInfo.get("url"), (String) perforInfo.get("price"),
                         (String) perforInfo.get("placeUrl"), (String) perforInfo.get("imgUrl"), 0);
 
-                exhibitionRepository.save(infoObj);
+                if (exhibitionRepository.findByTitle(infoObj.getTitle()).isEmpty()) {
+                    exhibitionRepository.save(infoObj);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -94,6 +102,7 @@ public class ExhibitionDBControllerTest {
         bf = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
         String result;
         result = bf.readLine();
+        log.info(result);
         JSONObject resultJsonObject = XML.toJSONObject(result);
 
         JSONObject response = (JSONObject) resultJsonObject.get("response");

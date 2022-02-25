@@ -47,4 +47,5 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
 
     List<Exhibition> findTop10ByOrderByLikeCntDesc();
 
+    Optional<Exhibition> findByTitle(String title);
 }
