@@ -43,9 +43,9 @@ public class Member implements UserDetails {
         this.id = id;
     }
 
-    public void updateMember(Member updateMember) {
-        if (updateMember.getNickname() != null) {
-            nickname = updateMember.getNickname();
+    public void updateMember(String updatedNickname) {
+        if (updatedNickname != null) {
+            this.nickname = updatedNickname;
         }
     }
 
@@ -83,6 +83,5 @@ public class Member implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-
 }
 
