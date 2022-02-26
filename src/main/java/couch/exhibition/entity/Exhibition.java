@@ -80,5 +80,4 @@ public class Exhibition {
         this.posterUrl = posterUrl;
         this.likeCnt = likeCnt;
     }
-
 }

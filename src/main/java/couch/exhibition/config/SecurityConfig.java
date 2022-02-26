@@ -41,8 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 유저 관련 페이지, 메인페이지, 전시회 DB 저장 페이지, 리소스
         web.ignoring().antMatchers(HttpMethod.POST, "/members")
                 .antMatchers("/")
-                .antMatchers(HttpMethod.GET, "/api")
-                .antMatchers(HttpMethod.POST, "/api")
                 .antMatchers("/resources/**")
                 .antMatchers("/favicon.ico")
                 .antMatchers("/index")

@@ -52,5 +52,4 @@ public class Review {
     public void updateReview(ReviewRequestDTO updateExhibitionReviewDTO) {
         this.content = updateExhibitionReviewDTO.getContent();
     }
-
 }

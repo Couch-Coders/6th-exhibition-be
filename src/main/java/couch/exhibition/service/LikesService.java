@@ -4,7 +4,6 @@ import couch.exhibition.dto.LikesDTO;
 import couch.exhibition.entity.Exhibition;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import couch.exhibition.entity.Likes;
 import couch.exhibition.entity.Member;
@@ -14,11 +13,9 @@ import couch.exhibition.repository.ExhibitionRepository;
 import couch.exhibition.repository.LikesRepository;
 import couch.exhibition.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -36,7 +33,6 @@ public class LikesService {
         this.exhibitionRepository = exhibitionRepository;
         this.memberRepository = memberRepository;
     }
-
 
     @Transactional
     public LikesDTO createLike(Member member, Long exhibitionId){
@@ -65,7 +61,6 @@ public class LikesService {
         return new LikesDTO(saveLike);
 
     }
-
 
     @Transactional
     public void deleteLike(Member member, Long exhibitionId){
@@ -126,5 +121,4 @@ public class LikesService {
             throw new CustomException(ErrorCode.NOT_FOUND_EXHIBITION);
         }
     }
-
 }

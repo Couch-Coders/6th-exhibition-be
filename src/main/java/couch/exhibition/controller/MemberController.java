@@ -43,7 +43,6 @@ public class MemberController {
         this.likesService = likesService;
     }
 
-
     //회원가입
     @PostMapping("")
     public MemberDto register(@RequestHeader("Authorization") String authorization,
@@ -108,5 +107,4 @@ public class MemberController {
         Member member = ((Member) authentication.getPrincipal());
         return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
-
 }

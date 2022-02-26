@@ -46,6 +46,4 @@ public class LikesController {
         //likesService.updateExhibitionLikeCnt(exhibition);
         return likesService.countLikes(exhibition);
     }
-
-
 }
