@@ -1,4 +1,4 @@
-package couch.exhibition.controller;
+package couch.exhibition.service;
 
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.repository.ExhibitionRepository;
@@ -23,12 +23,12 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class ExhibitionDBControllerTest {
+public class ExhibitionDBService {
 
     private final ExhibitionRepository exhibitionRepository;
 
     @Autowired
-    public ExhibitionDBControllerTest(ExhibitionRepository exhibitionRepository) {
+    public ExhibitionDBService(ExhibitionRepository exhibitionRepository) {
         this.exhibitionRepository = exhibitionRepository;
     }
 

@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
                 .antMatchers("/exhibitions/**/likes/count")
-                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/index.html","/swagger-ui/**");
+                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security","/swagger-ui/index.html", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/**");
 
 
     }
