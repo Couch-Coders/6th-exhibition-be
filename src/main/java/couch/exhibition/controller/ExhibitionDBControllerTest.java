@@ -37,8 +37,9 @@ public class ExhibitionDBControllerTest {
 
 //        String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D"; // 처리
         String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
-
-        for (int pageNo = 1; pageNo <= 5; pageNo++) {
+        int seqtotalCount = 0;
+        int pageNo = 1;
+        while (true){
             URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/realm?" +
                     "serviceKey=" + serviceKey +
                     "&from=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
@@ -51,7 +52,7 @@ public class ExhibitionDBControllerTest {
 
             JSONArray perforList = (JSONArray) msgBody.get("perforList");
 
-            log.info(String.valueOf(perforList));
+            int totalCount = (int) msgBody.get("totalCount");
 
             List<Integer> seqList = new ArrayList<>();
             for (int index = 0; index < perforList.length(); index++) {
@@ -59,11 +60,13 @@ public class ExhibitionDBControllerTest {
                 seqList.add(sequence);
             }
 
-            log.info(String.valueOf(seqList.size()));
-
-            log.info("ok1");
-
             getDBData(seqList);
+
+            seqtotalCount += seqList.size();
+
+            if(seqtotalCount == totalCount) break;
+
+            pageNo++;
         }
     }
 
