@@ -48,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/members")
                 .antMatchers("/")
                 .antMatchers("/resources/**")
-                .antMatchers("/favicon.ico")
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
