@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-
 @Slf4j
 @Controller
 public class ExhibitionDBController {
@@ -65,6 +64,5 @@ public class ExhibitionDBController {
         }
 
         return "redirect:/index";
-
     }
 }

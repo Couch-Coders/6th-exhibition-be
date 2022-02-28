@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +46,5 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
 
     List<Exhibition> findTop10ByOrderByLikeCntDesc();
 
+    Optional<Exhibition> findByTitle(String title);
 }

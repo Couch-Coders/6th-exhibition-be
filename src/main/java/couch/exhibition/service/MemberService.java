@@ -60,18 +60,10 @@ public class MemberService implements UserDetailsService {
 
         if(memberRepository.findByNickname(updatedMemberDTO.getNickname()).isEmpty()) {
 
-
-            Member updatedMember = Member.builder()
-                    .memberName(updatedMemberDTO.getMemberName())
-                    .nickname(updatedMemberDTO.getNickname())
-                    .id(updatedMemberDTO.getId())
-                    .build();
-
             // Optional의 .get() function을 이용, memberRepository에 있는 member 객체 가져옴.
-            member.get().updateMember(updatedMember);
+            member.get().updateMember(updatedMemberDTO.getNickname());
 
         } else {
-
             throw new CustomException(ErrorCode.EXIST_NICKNAME);
         }
     }
@@ -84,5 +76,4 @@ public class MemberService implements UserDetailsService {
     private boolean judgeIsDuplicatedNickname(String nickname) {
         return memberRepository.findByNickname(nickname).isPresent();
     }
-
 }

@@ -23,7 +23,6 @@ public enum ErrorCode {
     NOT_FOUND_EXHIBITION(HttpStatus.NOT_FOUND, "존재하지 않거나 마감된 전시회입니다."),
     NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다.");
 
-
     private final HttpStatus httpStatus;
     private final String message;
 }

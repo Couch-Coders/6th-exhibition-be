@@ -6,11 +6,14 @@ import couch.exhibition.exception.CustomException;
 import couch.exhibition.exception.ErrorCode;
 import couch.exhibition.service.ExhibitionService;
 import couch.exhibition.service.LikesService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags={"Likes service"})
 @Slf4j
 @RestController
 @RequestMapping("/exhibitions/{exhibitionId}/likes")
@@ -25,6 +28,7 @@ public class LikesController {
         this.exhibitionService = exhibitionService;
     }
 
+    @ApiOperation(value = "Exhibition like create" , notes = "해당 전시회에 좋아요 누르기")
     @PostMapping("")
     public void createLike(@PathVariable Long exhibitionId,
                            Authentication authentication) {
@@ -32,6 +36,7 @@ public class LikesController {
         likesService.createLike(member, exhibitionId);
     }
 
+    @ApiOperation(value = "Exhibition like delete" , notes = "내가 누른 좋아요 취소")
     @DeleteMapping("")
     public void deleteLike(@PathVariable Long exhibitionId,
                            Authentication authentication) {
@@ -39,6 +44,7 @@ public class LikesController {
         likesService.deleteLike(member, exhibitionId);
     }
 
+    @ApiOperation(value = "Exhibition likes count" , notes = "해당 전시의 좋아요 갯수 확인")
     @GetMapping("/count")
     public int countLikes(@PathVariable Long exhibitionId){
         Exhibition exhibition = exhibitionService.findById(exhibitionId)
@@ -46,6 +52,4 @@ public class LikesController {
         //likesService.updateExhibitionLikeCnt(exhibition);
         return likesService.countLikes(exhibition);
     }
-
-
 }
