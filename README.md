@@ -15,7 +15,7 @@
 # 제공되는 서비스 
 ### :large_orange_diamond:좋아요 순으로 볼 수 있는 Top10 전시회
 ### :large_orange_diamond:시도구별, 키워드로 전시회 검색
-### :large_orange_diamond:좋아요로 관심있는 전시회 모으기
+### :large_orange_diamond:좋아요로 관심있는 전시회 수집
 ### :large_orange_diamond:전시회 상세 정보 제공(위치, 입장료, 예매 사이트 등)
 ------
 
