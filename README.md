@@ -30,6 +30,9 @@
 <img src="https://img.shields.io/badge/Oauth-4285F4?style=flat-square&logo=Google&logoColor=blue"/>
 <img src="https://img.shields.io/badge/Heroku -ff69b4?style=flat-square&logo=Heroku&logoColor=white"/>
 
+# 아키텍처 구조 
+## ![image](https://user-images.githubusercontent.com/78532880/156154326-6dd06304-4684-41e7-a9bb-df915cdec185.png)
+
 # :bookmark_tabs: 프로젝트 기획&설계 문서
 ## ![image](https://user-images.githubusercontent.com/78532880/156139777-484159a3-96d9-44cc-9dc7-4557760864a5.png)
 ## :small_blue_diamond:[기능명세서](https://www.notion.so/SRS-ca78d049388b4780a046130f14a2e98a)
@@ -38,5 +41,12 @@
 ## :small_blue_diamond:[웹사이트 디자인](https://www.figma.com/file/FUezGZ9a98iq4WDopOM16r/%EC%B9%B4%EC%9A%B0%EC%B9%98%EC%BD%94%EB%94%A96%EA%B8%B0-%EC%A0%84%EC%8B%9C-(Copy)-(Copy)?node-id=133949%3A182043)
 
 ## :small_blue_diamond:[Swagger3로 확인하는 API 문서](https://exhibition-here.herokuapp.com/swagger-ui/index.html)
+
+## 업데이트 예정 부분
+- 전시 검색 기능 리팩토링
+- 전시 데이터 추가 
+
+## [프론트 엔드로 이동](https://github.com/Couch-Coders/6th-exhibition-fe)
+
 
 ### [참고자료](https://www.notion.so/997ce0e4f6864394b3be7b63c400c35b)
