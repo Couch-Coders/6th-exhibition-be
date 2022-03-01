@@ -14,17 +14,16 @@ jobs:
       - name: checkout frontend
         uses: actions/checkout@v2
         with:
-          repository: Couch-Coders/6th-exhibition-fe
+          repository: Couch-Coders/6th-exhibition-fe/couch-exhibition
           path: ./frontend
 
       - name: build frontend to resources
-         run: |
-            cd frontend
-            rm package-lock.json
-            npm install
-            npm run build
-            cd ..
-            cp -r frontend/build/* src/main/resources/static/
+        run: |
+          cd frontend
+          npm install
+          npm run build
+          cd ..
+          cp -r couch-exhibition/build/* src/main/resources/static/
 
       - uses: actions/setup-java@v2
         with:
