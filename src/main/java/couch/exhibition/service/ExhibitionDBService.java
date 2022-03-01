@@ -42,8 +42,7 @@ public class ExhibitionDBService {
         while (true){
             URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/realm?" +
                     "serviceKey=" + serviceKey +
-                    "&from=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
-                    "&to=" + LocalDate.now().plusYears(3).format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                    "&to=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
                     "&realmCode=D000" +
                     "&cPage=" + pageNo
             );
