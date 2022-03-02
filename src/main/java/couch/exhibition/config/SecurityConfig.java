@@ -33,8 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 스프링 시큐리티 해제, 36번째 줄 - postman 500 에러 방지
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/pages/**").permitAll()
                 .antMatchers("/api/v3/**", "health", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
