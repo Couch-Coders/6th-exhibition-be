@@ -34,12 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers( "/login").permitAll()
                 .antMatchers("/api/v3/**", "health", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
                         UsernamePasswordAuthenticationFilter.class)
-                .formLogin();
+                .formLogin()
+                    .failureForwardUrl("/pages");
 
 
 
