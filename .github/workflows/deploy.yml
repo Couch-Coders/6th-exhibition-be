@@ -25,6 +25,7 @@ jobs:
           npm install
           npm run build
           cd ..
+          cd ..
           cp -r frontend/couch-exhibition/build/* src/main/resources/static/
 
       - uses: actions/setup-java@v2
