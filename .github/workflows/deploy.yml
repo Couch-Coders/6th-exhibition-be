@@ -17,6 +17,7 @@ jobs:
           repository: Couch-Coders/6th-exhibition-fe
           path: ./frontend
 
+#       프론트 빌드 하기
       - name: build frontend to resources
         run: |
           cd frontend
