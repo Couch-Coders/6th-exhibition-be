@@ -25,6 +25,8 @@ jobs:
           npm run build
           cd ..
           cp -r frontend/build/* src/main/resources/static/
+        env:
+          CI: ""
 
       - uses: actions/setup-java@v2
         with:
