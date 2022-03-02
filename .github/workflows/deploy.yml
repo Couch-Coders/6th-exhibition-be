@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: Couch-Coders/6th-exhibition-fe
-          branches: [dev]
           path: ./frontend
 
 #       프론트 빌드 하기
@@ -25,7 +24,7 @@ jobs:
           npm install
           npm run build
           cd ..
-          cp -r frontend/couch-exhibition/build/* src/main/resources/static/
+          cp -r frontend/build/* src/main/resources/static/
 
       - uses: actions/setup-java@v2
         with:
