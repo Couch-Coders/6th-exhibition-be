@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
                         UsernamePasswordAuthenticationFilter.class)
-                .formLogin();
+                .formLogin()
+                    .failureForwardUrl("/pages");
     }
 
     @Override
