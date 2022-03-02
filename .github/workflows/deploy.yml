@@ -24,6 +24,7 @@ jobs:
           npm install
           npm run build
           cd ..
+          mkdir src/main/resources/static/
           cp -r frontend/build/* src/main/resources/static/
 
       - uses: actions/setup-java@v2
