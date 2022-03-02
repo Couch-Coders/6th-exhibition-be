@@ -50,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/members")
                 .antMatchers("/")
                 .antMatchers("/resources/**")
-                .antMatchers("/favicon.ico")
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
@@ -63,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.ico")
-                .antMatchers("/pages/**");
+                .antMatchers("/pages/**")
+                .antMatchers("/login/**");
     }
 
 }
