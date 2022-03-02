@@ -26,6 +26,8 @@ jobs:
           cd ..
           mkdir src/main/resources/static/
           cp -r frontend/build/* src/main/resources/static/
+        env:
+          CI: ""
 
       - uses: actions/setup-java@v2
         with:
