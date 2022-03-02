@@ -21,13 +21,11 @@ jobs:
       - name: build frontend to resources
         run: |
           cd frontend
-          cd couch-exhibition
           rm package-lock.json
           npm install
           npm run build
           cd ..
-          cd ..
-          cp -r frontend/couch-exhibition/build/* ../src/main/resources/static/
+          cp -r frontend/couch-exhibition/build/* src/main/resources/static/
 
       - uses: actions/setup-java@v2
         with:
