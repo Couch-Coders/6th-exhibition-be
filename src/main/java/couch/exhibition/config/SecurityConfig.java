@@ -49,7 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/")
                 .antMatchers("/resources/**")
                 .antMatchers("/index")
-                .antMatchers("https://exhibition-here.herokuapp.com/pages")
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
                 .antMatchers("/exhibitions/**/likes/count")
