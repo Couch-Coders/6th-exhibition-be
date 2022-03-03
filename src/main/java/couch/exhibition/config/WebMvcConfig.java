@@ -21,7 +21,7 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebMvc
-public class SwaggerConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
 
     private ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header");
