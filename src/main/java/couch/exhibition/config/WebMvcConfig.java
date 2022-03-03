@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
+        registry.addResourceHandler("/**/*")
                 .addResourceLocations("classpath:/static/")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
@@ -38,7 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                                                    Resource location) throws IOException {
                         Resource requestedResource = location.createRelative(resourcePath);
                         return requestedResource.exists() && requestedResource.isReadable() ? requestedResource
-                                : new ClassPathResource("/static/pages");
+                                : new ClassPathResource("/static/index.html");
                     }
                 });
 
