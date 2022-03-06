@@ -29,8 +29,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/*")
-                .addResourceLocations("classpath:/resources/")
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("classpath:/static/js/")
+                .addResourceLocations("classpath:/static/css/")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
                     @Override
