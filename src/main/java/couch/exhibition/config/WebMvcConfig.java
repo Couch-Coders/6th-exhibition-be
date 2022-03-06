@@ -20,7 +20,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.io.IOException;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private ApiKey apiKey() {
