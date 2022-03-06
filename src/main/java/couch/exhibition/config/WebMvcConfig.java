@@ -20,7 +20,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.io.IOException;
 
 @Configuration
-//@EnableWebMvc
+@EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private ApiKey apiKey() {
@@ -29,18 +29,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/*")
-                .addResourceLocations("classpath:/static/")
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("classpath:/resources/")
                 .resourceChain(true)
-                .addResolver(new PathResourceResolver() {
-                    @Override
-                    protected Resource getResource(String resourcePath,
-                                                   Resource location) throws IOException {
-                        Resource requestedResource = location.createRelative(resourcePath);
-                        return requestedResource.exists() && requestedResource.isReadable() ? requestedResource
-                                : new ClassPathResource("/static/index.html");
-                    }
-                });
+                .addResolver(new PathResourceResolver());
 
         registry
                 .addResourceHandler("/swagger-ui.html")
