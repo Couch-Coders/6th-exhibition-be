@@ -61,8 +61,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.ico")
+<<<<<<< HEAD
                 .antMatchers("/pages/**")
                 .antMatchers("**.png");
+=======
+                .antMatchers("/manifest.json")
+                .antMatchers("/pages/**");
+>>>>>>> a21fcf97a4cc2a6db5d53662e726814a134314d8
     }
 
 }
