@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/pages/**").permitAll()
-                .antMatchers("/api/v3/**", "health", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
+                .antMatchers("/api/v3/**", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.ico")
                 .antMatchers("/pages/**")
-                .antMatchers("**.png")
+                .antMatchers("/**")
                 .antMatchers("/manifest.json")
                 .antMatchers("/pages/**");
 
