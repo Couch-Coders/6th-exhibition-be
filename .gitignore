@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### DS_STORE ###
-*.DS_Store
+.DS_Store
 
 serviceAccountKey.json
 firebase.json
