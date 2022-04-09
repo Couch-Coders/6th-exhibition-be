@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class ExhibitionApplication {
 
 	public static void main(String[] args) {

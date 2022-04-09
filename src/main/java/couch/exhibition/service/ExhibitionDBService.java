@@ -32,7 +32,7 @@ public class ExhibitionDBService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    @Scheduled(cron = "0 0 0 * * *") // 추가 설정(매일 자정에 실행)
+//    @Scheduled(cron = "0 */5 * * * *") // 추가 설정(매일 자정에 실행)
     public void load_save() throws IOException {
 //        String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D"; // 처리
         String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
