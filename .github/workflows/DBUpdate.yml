@@ -16,5 +16,10 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: run main
-        run: java ExhibitionApplication
+      - name: run main application
+        run: |
+          cd src/main/java/couch/exhibition/
+          javac ExhibitionApplication.java
+          java ExhibitionApplication
+        env:
+          CI: ""
