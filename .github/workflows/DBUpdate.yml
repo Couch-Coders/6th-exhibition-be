@@ -16,10 +16,11 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: run main application
-        run: |
-          cd src/main/java/couch/exhibition/
-          javac ExhibitionApplication.java
-          java ExhibitionApplication
-        env:
-          CI: ""
+      - name: gradlew authorization
+        run: chmod +x ./gradlew
+
+      - name: build gradle
+        run: ./gradlew build
+
+      - name: run gradle
+        run: ./gradlew run
