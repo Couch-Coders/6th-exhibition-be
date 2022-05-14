@@ -1,5 +1,6 @@
 package couch.exhibition.service;
 
+import couch.exhibition.config.ServiceKey;
 import couch.exhibition.entity.Exhibition;
 import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ import java.util.List;
 @Component
 public class ExhibitionDBService {
 
+    private final ServiceKey SERVICE_KEY = ServiceKey.getInstance();
     private final ExhibitionRepository exhibitionRepository;
 
     @Autowired
@@ -32,10 +34,9 @@ public class ExhibitionDBService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0/5 * * * *")
     public void load_save() throws IOException {
-//        String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D"; // 처리
-        String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
+        String serviceKey = String.valueOf(SERVICE_KEY);
         int seqtotalCount = 0;
         int pageNo = 1;
         while (true){
@@ -72,8 +73,7 @@ public class ExhibitionDBService {
 
         for (Integer seq : seqList) {
             try {
-//                String serviceKey = "yu7NdPRhBWZtgcD4syUEm4DB3Vp%2BEVw05S%2BpLQvDHwzaRVSNvtFn6i9kuBLVia0LULNEFp3LASuS%2B%2B3iL4yP%2BA%3D%3D";
-                String serviceKey = "cqhL2N3Az%2BqDsTnmP5D0sUfmO7xujUBqG5gPWPxF7Ivv6eaIzWZtNrCBlyboVKnzjNY6gQviShM6JiC0DzKiGQ%3D%3D";
+                String serviceKey = String.valueOf(SERVICE_KEY);
                 URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/?" +
                         "serviceKey=" + serviceKey + "&seq=" + seq); // seq 타입?
 
