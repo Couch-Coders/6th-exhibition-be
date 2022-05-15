@@ -41,6 +41,3 @@ out/
 
 serviceAccountKey.json
 firebase.json
-
-### secret-key ###
-resources/application-service-key.properties
