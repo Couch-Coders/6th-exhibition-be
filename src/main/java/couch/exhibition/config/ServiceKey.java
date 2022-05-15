@@ -1,23 +1,13 @@
 package couch.exhibition.config;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Getter
+@Component
 public class ServiceKey {
 
-    @Value("${service-key}")
-    private String key;
-
-    private static ServiceKey instance = new ServiceKey();
-
-    private ServiceKey() {
-    }
-
-    public static ServiceKey getInstance() {
-        if (instance == null) {
-            instance = new ServiceKey();
-        }
-        return instance;
-    }
+    @Value("${serviceKey}")
+    public String serviceKey;
 }

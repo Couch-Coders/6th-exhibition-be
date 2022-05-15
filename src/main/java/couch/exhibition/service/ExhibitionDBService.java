@@ -26,17 +26,18 @@ import java.util.List;
 @Component
 public class ExhibitionDBService {
 
-    private final ServiceKey SERVICE_KEY = ServiceKey.getInstance();
+    private final ServiceKey SERVICE_KEY;
     private final ExhibitionRepository exhibitionRepository;
 
     @Autowired
-    public ExhibitionDBService(ExhibitionRepository exhibitionRepository) {
+    public ExhibitionDBService(ServiceKey SERVICE_KEY, ExhibitionRepository exhibitionRepository) {
+        this.SERVICE_KEY = SERVICE_KEY;
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void load_save() throws IOException {
-        String serviceKey = String.valueOf(SERVICE_KEY);
+        String serviceKey = SERVICE_KEY.getServiceKey();
         int seqtotalCount = 0;
         int pageNo = 1;
         while (true){
@@ -70,10 +71,9 @@ public class ExhibitionDBService {
     }
 
     private void getDBData(List<Integer> seqList) {
-
+        String serviceKey = SERVICE_KEY.getServiceKey();
         for (Integer seq : seqList) {
             try {
-                String serviceKey = String.valueOf(SERVICE_KEY);
                 URL url = new URL("http://www.culture.go.kr/openapi/rest/publicperformancedisplays/d/?" +
                         "serviceKey=" + serviceKey + "&seq=" + seq); // seq 타입?
 
