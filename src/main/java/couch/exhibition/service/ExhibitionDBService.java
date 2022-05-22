@@ -95,7 +95,7 @@ public class ExhibitionDBService {
                 e.printStackTrace();
             }
         }
-        log.info("ok2");
+//        log.info("DB save completed");
     }
 
     private JSONObject getMsgBody(URL url) throws IOException {
@@ -103,7 +103,7 @@ public class ExhibitionDBService {
         bf = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
         String result;
         result = bf.readLine();
-        log.info(result);
+//        log.info(result);
         JSONObject resultJsonObject = XML.toJSONObject(result);
 
         JSONObject response = (JSONObject) resultJsonObject.get("response");
