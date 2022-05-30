@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 유저 관련 페이지, 메인페이지, 전시회 DB 저장 페이지, 리소스
         web.ignoring().antMatchers(HttpMethod.POST, "/members")
-                .antMatchers("/pages/**")
+                .antMatchers("/pages/**") // 4xx error fixed
                 .antMatchers("/resources/**")
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**")
                 .antMatchers("/vendor/**")
                 .antMatchers("/favicon.ico")
-                .antMatchers("/manifest.json");
+                .antMatchers("/manifest.json")
+                .antMatchers("/**/*.png");
 //                .antMatchers("/**"); -> problem!
     }
 
