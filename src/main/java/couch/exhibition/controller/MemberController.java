@@ -99,14 +99,14 @@ public class MemberController {
     }
 
     @ApiOperation(value = "My like exhibitions list" , notes = "내가 좋아요 누른 전시회 마감순으로 정렬")
-    @GetMapping("me/likes")
+    @GetMapping("/me/likes")
     public Page<LikesDTO> listLikeExhibition(@PageableDefault(sort = "exhibition.endDate",direction = Sort.Direction.ASC) Pageable pageable, Authentication authentication) {
             Member member = ((Member) authentication.getPrincipal());
             return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
     }
 
     @ApiOperation(value = "My like exhibitions three" , notes = "내가 좋아요 누른 전시회 마감순으로 3개")
-    @GetMapping("me/likes3")
+    @GetMapping("/me/likes3")
     public Page<LikesDTO> listLike3Exhibition(@PageableDefault(sort = "exhibition.endDate", direction = Sort.Direction.ASC, size = 3) Pageable pageable, Authentication authentication) {
         Member member = ((Member) authentication.getPrincipal());
         return likesService.listLikeExhibition(member, pageable).map( likes-> new LikesDTO(likes));
