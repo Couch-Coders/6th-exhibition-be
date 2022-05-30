@@ -32,14 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 스프링 시큐리티 해제, 36번째 줄 - postman 500 에러 방지
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/pages/**").permitAll()
-                .antMatchers("/api/v3/**", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
+//                .antMatchers(HttpMethod.GET, "/pages/**").permitAll()  -> no
+//                .antMatchers("/api/v3/**", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
-                        UsernamePasswordAuthenticationFilter.class)
-                .formLogin()
-                    .failureForwardUrl("/pages");
+                        UsernamePasswordAuthenticationFilter.class);
+//                .formLogin()
+//                    .failureForwardUrl("/pages"); -> no
     }
 
     @Override
@@ -51,19 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
-                .antMatchers("/exhibitions/**/likes/count")
-                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security","/swagger-ui/index.html", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/**")
-                .antMatchers("/css/**")
-                .antMatchers("/static/**")
-                .antMatchers("/js/**")
-                .antMatchers("/img/**")
-                .antMatchers("/fonts/**")
-                .antMatchers("/vendor/**")
-                .antMatchers("/favicon.ico")
-                .antMatchers("/pages/**")
-                .antMatchers("/**")
-                .antMatchers("/manifest.json")
-                .antMatchers("/pages/**");
+                .antMatchers("/exhibitions/**/likes/count");
+//                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security","/swagger-ui/index.html", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/**")
+//                .antMatchers("/css/**")
+//                .antMatchers("/static/**")
+//                .antMatchers("/js/**")
+//                .antMatchers("/img/**")
+//                .antMatchers("/fonts/**")
+//                .antMatchers("/vendor/**")
+//                .antMatchers("/favicon.ico")
+//                .antMatchers("/**"); -> problem!
+//                .antMatchers("/manifest.json")
+//                .antMatchers("/pages/**"); -> no
 
     }
 
