@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pages/**")
                 .antMatchers("/**")
                 .antMatchers("/manifest.json")
-                .antMatchers("/members/me/**)
                 .antMatchers("/pages/**");
 
     }
