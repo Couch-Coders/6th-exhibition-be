@@ -19,7 +19,7 @@ import java.util.*;
 @Api(tags = {"Exhibition search service"})
 @Slf4j
 @RestController
-@RequestMapping("exhibitions/search")
+@RequestMapping("/exhibitions/search")
 public class ExhibitionController {
 
     private final ExhibitionService exhibitionService;
