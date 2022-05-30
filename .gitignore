@@ -39,5 +39,5 @@ out/
 ### DS_STORE ###
 .DS_Store
 
-serviceAccountKey.json
-firebase.json
+#serviceAccountKey.json
+#firebase.json
