@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 스프링 시큐리티 해제, 36번째 줄 - postman 500 에러 방지
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/pages/**").permitAll()
+//                .antMatchers(HttpMethod.GET, "/pages/**").permitAll() -> not necessary
 //                .antMatchers("/api/v3/**", "/swagger-ui.html", "/swagger/**", "/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 유저 관련 페이지, 메인페이지, 전시회 DB 저장 페이지, 리소스
         web.ignoring().antMatchers(HttpMethod.POST, "/members")
-                .antMatchers("/")
+                .antMatchers("/pages/**")
                 .antMatchers("/resources/**")
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
@@ -62,7 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/favicon.ico")
 //                .antMatchers("/**"); -> problem!
 //                .antMatchers("/manifest.json")
-//                .antMatchers("/pages/**"); -> no
 
     }
 
