@@ -51,18 +51,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index")
                 .antMatchers("/exhibitions/search/**")
                 .antMatchers(HttpMethod.GET, "/exhibitions/**/viewAllReviews")
-                .antMatchers("/exhibitions/**/likes/count");
-//                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security","/swagger-ui/index.html", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/**")
-//                .antMatchers("/css/**")
-//                .antMatchers("/static/**")
-//                .antMatchers("/js/**")
-//                .antMatchers("/img/**")
-//                .antMatchers("/fonts/**")
-//                .antMatchers("/vendor/**")
-//                .antMatchers("/favicon.ico")
+                .antMatchers("/exhibitions/**/likes/count")
+                .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security","/swagger-ui/index.html", "/swagger-ui.html", "/webjars/**","/swagger/**","/swagger-ui/**")
+                .antMatchers("/css/**")
+                .antMatchers("/static/**")
+                .antMatchers("/js/**")
+                .antMatchers("/img/**")
+                .antMatchers("/fonts/**")
+                .antMatchers("/vendor/**")
+                .antMatchers("/favicon.ico")
+                .antMatchers("/manifest.json");
 //                .antMatchers("/**"); -> problem!
-//                .antMatchers("/manifest.json")
-
     }
 
 }
