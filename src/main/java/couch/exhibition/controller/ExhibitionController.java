@@ -45,39 +45,23 @@ public class ExhibitionController {
         List<Exhibition> list;
         log.info("/ 통과1");
 
-        if(city == "서울시") city="서울특별시";
-        
-        if(city != null && area != null && keyword != null){
+        if(city.equals("서울시")) city = "서울특별시";
+
+        if(area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
             list= exhibitionService.findByAllCategory(city, area, keyword, todayToInt, pageable);
         }
-        else if(city != null && area != null && keyword == null ) {
+        else if(area != null) {
             log.info("findByCityAndArea(city, area) 통과");
             list= exhibitionService.findByCityAndArea(city, area, todayToInt, pageable);
         }
-        else if(city != null && area == null && keyword == null) {
+        else if(keyword == null) {
             log.info("findByCity(city) 통과");
             list= exhibitionService.findByCity(city, todayToInt,pageable);
         }
-        else if(city == null && area != null && keyword != null) {
-            log.info("findByAreaAndKeyword(area, keyword) 통과");
-            list= exhibitionService.findByAreaAndKeyword(area, keyword,todayToInt, pageable);
-        }
-        else if(city == null && area != null && keyword == null) {
-            log.info("exhibitionService.findByArea(area) 통과");
-            list= exhibitionService.findByArea(area, todayToInt,pageable);
-        }
-        else if(city != null && area == null && keyword != null){
+        else {
             log.info("findByCityAndKeyword(city, keyword) 통과");
             list= exhibitionService.findByCityAndKeyword(city, keyword,todayToInt, pageable);
-        }
-        else if(city == null && area == null && keyword != null) {
-            log.info("findByKeyword(keyword) 통과");
-            list= exhibitionService.findByKeyword(keyword, todayToInt,pageable);
-        }
-        else {
-            log.info("findAllExhibitions 통과");
-            list = exhibitionService.findAllExhibitions(todayToInt,pageable);
         }
 
         if(list != null) return list;
