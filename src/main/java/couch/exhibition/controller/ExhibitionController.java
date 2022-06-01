@@ -79,6 +79,13 @@ public class ExhibitionController {
     public List<Exhibition> exhibitionsTop10(@RequestParam(value = "today", required = false) String today){
         today  = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int todayToInt = Integer.parseInt(today);
-        return exhibitionService.findTop10ByLikeCnt(todayToInt);
+        List<Exhibition> ExhibitionList= exhibitionService.findTop10ByLikeCnt(todayToInt);
+
+        List<Exhibition> Exhibition10List = new ArrayList<>();
+        for(int i=0; i<10; i++){
+            Exhibition10List.add(ExhibitionList.get(i));
+        }
+
+        return Exhibition10List;
     }
 }
