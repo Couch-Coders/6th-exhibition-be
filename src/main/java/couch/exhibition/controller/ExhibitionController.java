@@ -76,7 +76,9 @@ public class ExhibitionController {
 
     @ApiOperation(value = "Exhibition likes count Top10", notes ="좋아요 수에 따른 전시회 TOP10 조회")
     @GetMapping("/top10")
-    public List<Exhibition> exhibitionsTop10(){
-        return exhibitionService.findTop10ByLikeCnt();
+    public List<Exhibition> exhibitionsTop10(int today){
+        String todayStr  = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        today = Integer.parseInt(todayStr);
+        return exhibitionService.findTop10ByLikeCnt(today);
     }
 }
