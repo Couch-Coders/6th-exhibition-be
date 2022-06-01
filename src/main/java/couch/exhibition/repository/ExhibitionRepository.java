@@ -44,6 +44,7 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
     @Override
     Optional<Exhibition> findById(Long id);
 
+    @Query("select m from Exhibition m where m.startDate <= :today and :today<=m.endDate order by m.likeCnt")
     List<Exhibition> findTop10ByOrderByLikeCntDesc();
 
     Optional<Exhibition> findByTitle(String title);
