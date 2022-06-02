@@ -35,15 +35,13 @@ public class ExhibitionController {
                                            @RequestParam(value = "area", required = false) String area,
                                            @RequestParam(value = "keyword", required = false) String keyword,
                                            @RequestParam(value = "today", required = false) String today,
-                                           @PageableDefault(size = 10, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable){
+                                           @PageableDefault(size = 100, sort = "startDate", direction = Sort.Direction.DESC) Pageable pageable){
 
 
        today  = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
        int todayToInt = Integer.parseInt(today);
 
-        log.info("/ 통과 "+ todayToInt);
         List<Exhibition> list;
-        log.info("/ 통과1");
 
         if(city.equals("전체")){
             list = exhibitionService.findAllExhibitions(todayToInt, pageable);
