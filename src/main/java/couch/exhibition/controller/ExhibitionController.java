@@ -41,7 +41,7 @@ public class ExhibitionController {
        today  = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
        int todayToInt = Integer.parseInt(today);
 
-        List<Exhibition> list;
+        List<Exhibition> list = new ArrayList<>();
 
         if(city.equals("전체") && keyword == null){
             list = exhibitionService.findAllExhibitions(todayToInt, pageable);
@@ -59,18 +59,18 @@ public class ExhibitionController {
             log.info("findByAllCategory(city, area, keyword) 통과");
             list= exhibitionService.findByAllCategory(city, area, keyword, todayToInt, pageable);
         }
-        else if(area != null) {
+        else if(area != null && keyword == null) {
             log.info("findByCityAndArea(city, area) 통과");
             list= exhibitionService.findByCityAndArea(city, area, todayToInt, pageable);
         }
-        else if(keyword == null) {
-            log.info("findByCity(city) 통과");
-            list= exhibitionService.findByCity(city, todayToInt,pageable);
-        }
-        else {
-            log.info("findByCityAndKeyword(city, keyword) 통과");
-            list= exhibitionService.findByCityAndKeyword(city, keyword,todayToInt, pageable);
-        }
+//        else if(keyword == null) {
+//            log.info("findByCity(city) 통과");
+//            list= exhibitionService.findByCity(city, todayToInt,pageable);
+//        }
+//        else {
+//            log.info("findByCityAndKeyword(city, keyword) 통과");
+//            list= exhibitionService.findByCityAndKeyword(city, keyword,todayToInt, pageable);
+//        }
 
         if(list != null) return list;
         else throw new CustomException(ErrorCode.NOT_FOUND_EXHIBITION);
