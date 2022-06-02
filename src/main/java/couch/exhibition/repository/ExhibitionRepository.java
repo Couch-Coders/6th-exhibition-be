@@ -18,7 +18,7 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Long>{
     Page<Exhibition> findAll(@Param("today") int today,Pageable pageable);
 
     @Query("select m from Exhibition m where m.startDate <= :today and :today <= m.endDate")
-    List<Exhibition> findAllExhibitions(int today,Pageable pageable);
+    List<Exhibition> findAllExhibitions(@Param("today") int today,Pageable pageable);
 
     @Query("select m from Exhibition m where (m.title like %:keyword% or m.place like %:keyword%) and m.startDate <= :today and :today <= m.endDate ")
     List<Exhibition> findByKeyword(@Param("keyword") String keyword,@Param("today") int today, Pageable pageable);
