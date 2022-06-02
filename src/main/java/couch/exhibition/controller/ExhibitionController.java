@@ -45,7 +45,7 @@ public class ExhibitionController {
         List<Exhibition> list;
         log.info("/ 통과1");
 
-       // if(city.equals("서울시")) city = "서울특별시";
+       if(city.equals("전체")) list = exhibitionService.findAllExhibitions(todayToInt, pageable);
 
         if(area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
