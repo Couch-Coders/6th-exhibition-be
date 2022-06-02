@@ -49,7 +49,7 @@ public class ExhibitionController {
         else if(city.equals("전체") && keyword != null){
             list = exhibitionService.findByKeyword(keyword, todayToInt, pageable);
         }
-        else if(area.equals("전체")){
+        else if(area.equals("전체") && keyword == null){
             list = exhibitionService.findByCity(city,todayToInt, pageable);
         }
         else if(area.equals("전체") && keyword != null){
