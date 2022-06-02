@@ -45,9 +45,10 @@ public class ExhibitionController {
         List<Exhibition> list;
         log.info("/ 통과1");
 
-       if(city.equals("전체")) list = exhibitionService.findAllExhibitions(todayToInt, pageable);
-
-        if(area != null && keyword != null){
+        if(city.equals("전체")){
+            list = exhibitionService.findAllExhibitions(todayToInt, pageable);
+        }
+        else if(area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
             list= exhibitionService.findByAllCategory(city, area, keyword, todayToInt, pageable);
         }
