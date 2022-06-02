@@ -43,11 +43,17 @@ public class ExhibitionController {
 
         List<Exhibition> list;
 
-        if(city.equals("전체")){
+        if(city.equals("전체") && keyword == null){
             list = exhibitionService.findAllExhibitions(todayToInt, pageable);
+        }
+        else if(city.equals("전체") && keyword != null){
+            list = exhibitionService.findByKeyword(keyword, todayToInt, pageable);
         }
         else if(area.equals("전체")){
             list = exhibitionService.findByCity(city,todayToInt, pageable);
+        }
+        else if(area.equals("전체") && keyword != null){
+            list = exhibitionService.findByCityAndKeyword(city, keyword, todayToInt, pageable);
         }
         else if(area != null && keyword != null){
             log.info("findByAllCategory(city, area, keyword) 통과");
