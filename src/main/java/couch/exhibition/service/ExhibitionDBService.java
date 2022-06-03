@@ -35,7 +35,7 @@ public class ExhibitionDBService {
         this.exhibitionRepository = exhibitionRepository;
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "${regular.cron}")
     public void load_save() throws IOException {
         String serviceKey = SERVICE_KEY.getServiceKey();
         int seqtotalCount = 0;
