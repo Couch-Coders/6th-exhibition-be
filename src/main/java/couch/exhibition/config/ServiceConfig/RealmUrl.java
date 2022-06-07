@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class ServiceKey {
+public class RealmUrl {
 
-    @Value("${serviceKey}")
-    public String serviceKey;
+    @Value("${realmUrl}")
+    public String realmUrl;
 }
