@@ -3,9 +3,8 @@ package couch.exhibition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.TaskScheduler;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
 @SpringBootApplication
 @EnableScheduling
@@ -16,7 +15,7 @@ public class ExhibitionApplication {
 	}
 
 	@Bean
-	public TaskScheduler taskScheduler() {
-		return new ConcurrentTaskScheduler();
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
 	}
 }
