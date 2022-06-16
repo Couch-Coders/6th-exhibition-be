@@ -1,5 +1,6 @@
 package couch.exhibition.service.DBService;
 
+import couch.exhibition.exception.DBException.DBCustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,18 +26,20 @@ public class ExhibitionGetMsgBodyService {
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public JSONObject getMsgBody(URL url) {
-        BufferedReader bf = null;
+        BufferedReader bf;
         try {
             bf = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             log.warn("URL IOException", e);
+            throw new DBCustomException("URL IOException");
         }
 
         String result = null;
         try {
-            result = bf != null ? bf.readLine() : null;
+            result = bf.readLine();
         } catch (IOException e) {
             log.warn("bf IOException", e);
+            throw new DBCustomException("bf IOException");
         } catch (JSONException e) {
             log.warn("Unclosed tag", e);
         }

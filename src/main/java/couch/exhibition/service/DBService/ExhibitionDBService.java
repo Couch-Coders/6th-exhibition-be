@@ -2,6 +2,7 @@ package couch.exhibition.service.DBService;
 
 import couch.exhibition.config.ServiceConfig.RealmUrl;
 import couch.exhibition.config.ServiceConfig.ServiceKey;
+import couch.exhibition.exception.DBException.DBCustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,7 +46,7 @@ public class ExhibitionDBService {
         int seqtotalCount = 0;
         int pageNo = 1;
         while (true){
-            URL url = null;
+            URL url;
             try {
                 url = new URL(realmUrl +
                         "serviceKey=" + serviceKey +
@@ -55,6 +56,7 @@ public class ExhibitionDBService {
                 );
             } catch (MalformedURLException e) {
                 log.warn("malformed URL", e);
+                throw new DBCustomException("malformed URL");
             }
 
             JSONObject msgBody = exhibitionGetMsgBodyService.getMsgBody(url);

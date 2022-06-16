@@ -3,6 +3,7 @@ package couch.exhibition.service.DBService;
 import couch.exhibition.config.ServiceConfig.ExhibitionUrl;
 import couch.exhibition.config.ServiceConfig.ServiceKey;
 import couch.exhibition.entity.Exhibition;
+import couch.exhibition.exception.DBException.DBCustomException;
 import couch.exhibition.repository.ExhibitionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
@@ -66,6 +67,7 @@ public class ExhibitionGetDataService {
                 log.warn("gps x, y coordinates are null", e);
             } catch (MalformedURLException e) {
                 log.warn("malformed URL", e);
+                throw new DBCustomException("malformed URL");
             }
         }
     }
