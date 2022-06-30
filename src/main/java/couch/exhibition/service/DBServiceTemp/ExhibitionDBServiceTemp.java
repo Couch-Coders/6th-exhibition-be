@@ -115,6 +115,8 @@ public class ExhibitionDBServiceTemp {
             } catch (MalformedURLException e) {
                 log.warn("malformed URL", e);
                 throw new DBCustomException("malformed URL");
+            } catch (Exception e) {
+                log.warn("Unexpected Exception", e);
             }
         }
     }
