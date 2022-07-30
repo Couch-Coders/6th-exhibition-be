@@ -38,7 +38,7 @@ public class ExhibitionDBService {
     1. java.net.MalformedURLException (extends IOException) -> change into RuntimeException
      */
     @Transactional
-    @Scheduled(cron = "${regular.cron}")
+    @Scheduled(cron = "${regular.cron}", zone = "Asia/Seoul")
     public void load_save() {
         String serviceKey = SERVICE_KEY.getServiceKey();
         String realmUrl = REALM_URL.getRealmUrl();
