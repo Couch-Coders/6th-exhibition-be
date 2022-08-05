@@ -30,8 +30,8 @@
 <img src="https://img.shields.io/badge/Oauth-4285F4?style=flat-square&logo=Google&logoColor=blue"/>
 <img src="https://img.shields.io/badge/Heroku -ff69b4?style=flat-square&logo=Heroku&logoColor=white"/>
 
-# 아키텍처 구조 
-## ![image](https://user-images.githubusercontent.com/78532880/156154326-6dd06304-4684-41e7-a9bb-df915cdec185.png)
+# 시스템 아키텍처
+## ![image](https://user-images.githubusercontent.com/76935186/183085338-77e99970-8484-445a-8b75-ee9e8baf8f52.png)
 
 # :bookmark_tabs: 프로젝트 기획&설계 문서
 ## ![image](https://user-images.githubusercontent.com/78532880/156139777-484159a3-96d9-44cc-9dc7-4557760864a5.png)
