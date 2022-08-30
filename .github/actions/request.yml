@@ -8,10 +8,7 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: main
-
-      - name: http request
+      - name: https request
         shell: bash
-        run: curl -X GET https://exhibition-here.herokuapp.com/pages
+        run: |
+          curl -X GET https://exhibition-here.herokuapp.com/pages
